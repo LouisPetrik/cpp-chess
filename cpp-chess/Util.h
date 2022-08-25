@@ -9,7 +9,11 @@
 #define Util_h
 
 
-void sayHello(); 
+void sayHello();
+
+
+int *figurFinden(char figurZeichen, char brettState[8][8]);
+
 
 
 #endif /* Util_h */
