@@ -8,9 +8,12 @@
 #ifndef Util_h
 #define Util_h
 
+using namespace std; 
 
 void sayHello();
 
+
+int *feldbezeichnungZuKoord(string feld); 
 
 int *figurFinden(char figurZeichen, char brettState[8][8]);
 

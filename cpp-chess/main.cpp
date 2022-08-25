@@ -92,6 +92,20 @@ char moeglicheAngriffeWeiß[8][8] = {
 };
 
 
+// füllt die beiden angriffe<Farbe> arrays mit dem standard wert.
+void angriffeZuruecksetzen() {
+  for (int i = 0; i < 8; i++) {
+    fill_n(angriffeWeiß[i], 8, '.');
+    fill_n(angriffeSchwarz[i], 8, '.');
+  }
+}
+
+void moeglicheAngriffeZuruecksetzen() {
+  for (int i = 0; i < 8; i++) {
+    fill_n(moeglicheAngriffeWeiß[i], 8, '.');
+    fill_n(moeglicheAngriffeSchwarz[i], 8, '.');
+  }
+}
 // klappt wunderbar
 void brettAusgeben() {
   cout << "---------------" << endl;
@@ -105,7 +119,7 @@ void brettAusgeben() {
 }
 
 
-void zugMachen(char *zugNotation)
+void zugMachen(string zugNotation)
 {
 
   cout << "Uebergeben: " << endl;
@@ -139,6 +153,14 @@ void zugMachen(char *zugNotation)
   posSchwarzerKing[0] = ptrSchwarzerKingPos[0];
   posSchwarzerKing[1] = ptrSchwarzerKingPos[1];
   
+  cout << "Übergebene zug notation: " << zugNotation << endl;
+  string ausgangsfeld = zugNotation.substr(0, 2);
+  string zielfeld = zugNotation.substr(3);
+  
+
+  // könnte vielleicht anstatt zwei mal function call einmalig in array gespeichert und dann daraus entnommen werden. 
+  int iAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[0];
+  int jAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[1];
 
  
 };
@@ -149,12 +171,16 @@ int main(int argc, const char * argv[]) {
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
   
-  
-  
+  zugMachen("e2-e4");
+
 
   
   brettAusgeben();
 
+  
+  
+  angriffeZuruecksetzen();
+  
   
   
   
