@@ -33,8 +33,8 @@ bool schwarzRochadeLangMoeglich = true;
 bool weißerKingImSchach = false;
 bool schwarzerKingImSchach = false;
 
-// if(!enPassantBauer) geht?
-int enPassantBauer[2] = {};
+// Wird auch immer auf 0, 0 zurückgesetzt, da irgendwie auf NULL oder mit delete nicht funktioniert.
+int enPassantBauer[2] = {0, 0};
 
 int halbzugNummer = 1;
 
@@ -126,10 +126,9 @@ void zugMachen(string zugNotation)
   
   
   cout << "-------------------------------" << endl;
-  cout << "Zug: " << halbzugNummer << endl; 
+  cout << "Zug: " << halbzugNummer << endl;
 
-  cout << "Uebergeben: " << endl;
-  cout << zugNotation << endl;
+
 
   if (halbzugNummer % 2 == 0)
   {
@@ -197,11 +196,38 @@ void zugMachen(string zugNotation)
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
       
+      
       cout << "Anzahl möglicher Züge: " << endl; 
       cout << moeglicheZuege.size() << endl;
       
       
-      // sobald der nächste Zug legi
+      // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
+      
+      if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
+        if (weißAmZug) {
+          if (iZielfeld == enPassantBauer[0] - 1 && jZielfeld == enPassantBauer[1]) {
+            cout << "Weiß hat Bauer auf " << enPassantBauer[0] << " " << enPassantBauer[1] << " en-passant genommmen" << endl;
+            
+            // übernehmen, dass per en passant geschlagen wurde:
+            // könnte auch ein scope höher, da sonst redundant mit der variante für schwarz.
+            brettState[enPassantBauer[0]][enPassantBauer[1]] = '.';
+          }
+        }
+        // selbes spiel für schwarz:
+        if (!weißAmZug) {
+          if (iZielfeld == enPassantBauer[0] + 1 && jZielfeld == enPassantBauer[1]) {
+            cout << "Schwarz hat Bauer auf " << enPassantBauer[0] << " " << enPassantBauer[1] << " en-passant genommmen" << endl;
+            
+            // übernehmen, dass per en passant geschlagen wurde:
+            brettState[enPassantBauer[0]][enPassantBauer[1]] = '.';
+          }
+        }
+      }
+
+      
+      // hier immer erstmal den en-passant bauern zurücksetzen.
+      enPassantBauer[0] = 0;
+      enPassantBauer[1] = 0;
       
       
       // abfangen, wenn ein bauer zwei Schritte aus Grundstellung kommt, und damit en-passant schlagbar ist:
@@ -211,6 +237,7 @@ void zugMachen(string zugNotation)
         enPassantBauer[1] = jZielfeld;
       }
       
+      // wieso klappt hier nicht, doppelschritt auszugeben?
       if (!weißAmZug && iZielfeld == 3 && iAusgangsfeld == 1) {
         cout << "Schwarzer Bauer Doppelschritt!" << endl;
         enPassantBauer[0] = iZielfeld;
@@ -242,6 +269,11 @@ void zugMachen(string zugNotation)
   // testen, ob einer der beiden könige im schach steht:
   
   
+  // andere seite ist wieder am zug:
+  
+  weißAmZug = !weißAmZug;
+  
+  
 
  
 };
@@ -252,11 +284,13 @@ int main(int argc, const char * argv[]) {
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
   
+  
   zugMachen("e2-e4");
   zugMachen("a7-a5");
   zugMachen("e4-e5");
   zugMachen("d7-d5");
-  zugMachen("e5-d6"); 
+  zugMachen("e5-d6");
+  
   
   /*
    En passant testen:

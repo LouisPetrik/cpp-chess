@@ -1,10 +1,3 @@
-//
-//  Pawn.cpp
-//  cpp-chess
-//
-//  Created by Louis Petrik on 26.08.22.
-//
-
 #include "Pawn.h"
 #include <vector>
 #include <stdio.h>
@@ -12,6 +5,8 @@
 #include <array>
 #include <algorithm>
 
+
+// Grobe Beschreibung wofür die Funktionen sind ist in Pawn.h!
 
 using namespace std; 
 
@@ -46,7 +41,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
         
       }
-    }g
+    }
     
     // Im folgenden code wird std::find genutzt, welches true returnt, wenn ein wert (letzter parameter) im definierten spektrum liegt
     // testen, ob weiß nach rechts-oben schlagen kann. Dafür muss getestet werden, ob brettState eine von mehreren chars an einer stelle enthält
@@ -65,20 +60,25 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
     // testen, ob en-passant möglich ist:
     // vermutlich kann man auch einfach !enPassantBauer, aber idk wie C++ das sieht.
-    if (enPassantBauer != NULL) {
-      cout << "Oben rechts: ";
+    if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
+      cout << "rechts vom bauern: ";
       cout << brettState[i][j + 1] << endl;
       // en-passant nach oben rechts (von weiß aus). Eventuell muss umgeschrieben werden, an dieser stelle in JS .includes() verwendet.
       if (brettState[i][j + 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[i] == j + 1) {
-        cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << j + 1 << "möglich" << endl;
+        cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j + 1 << " möglich" << endl;
       }
       
       
-      cout << "Oben links: ";
-      cout << brettState[i][j - 1] << endl; 
+      cout << "links vom bauern: ";
+      cout << brettState[i][j - 1] << endl;
+      
+      cout << "En-passant bauer i: " << enPassantBauer[0] << " j: " << enPassantBauer[0] << endl;
+     
+ 
       // en-passant nach oben-links (von weiß aus). Selbes spiel wie eben, muss vielleicht überschrieben werden
+      // Es scheitert irgendwie gerade an enPassantBauer
       if (brettState[i][j - 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
-        cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << j - 1 << "möglich" << endl;
+        cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j - 1 << "möglich" << endl;
       }
     }
   
@@ -110,7 +110,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     }
     
     // testen, ob en-passant geschlagen werden kann:
-    if (enPassantBauer != NULL) {
+    if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
       // ob en passant nach rechts geschlagen werden kann:
       
       if (brettState[i][j + 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
