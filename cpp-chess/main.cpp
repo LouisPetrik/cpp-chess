@@ -179,6 +179,8 @@ void zugMachen(string zugNotation)
   // die möglichen Züge der Figur. Als vektor, damit geadded werden kann
   vector<array<int, 2>> moeglicheZuege;
   
+
+  
   
   switch (figurZeichen) {
     
@@ -193,7 +195,29 @@ void zugMachen(string zugNotation)
       cout << moeglicheZuege.size() << endl;
       
       
+      // sobald der nächste Zug legi
+      
+      
+      // abfangen, wenn ein bauer zwei Schritte aus Grundstellung kommt, und damit en-passant schlagbar ist:
+      if (weißAmZug && iZielfeld == 4 && iAusgangsfeld == 6) {
+        cout << "Weißer Bauer Doppelschritt!" << endl;
+        enPassantBauer[0] = iZielfeld;
+        enPassantBauer[1] = jZielfeld;
+      }
+      
+      if (!weißAmZug && iZielfeld == 3 && iAusgangsfeld == 1) {
+        cout << "Schwarzer Bauer Doppelschritt!" << endl;
+        enPassantBauer[0] = iZielfeld;
+        enPassantBauer[1] = jZielfeld;
+      }
+      
+      
       break;
+    
+    case 'N':
+    case 'n':
+      cout << "Springer wurde bewegt!" << endl;
+      
       
   }
   
@@ -203,11 +227,15 @@ void zugMachen(string zugNotation)
   cout << "hello world" << endl;
   
   
+  //
 
   
   // den zug einfach testweise mal durchführen:
   brettState[iAusgangsfeld][jAusgangsfeld] = '.';
   brettState[iZielfeld][jZielfeld] = figurZeichen;
+  
+  // testen, ob einer der beiden könige im schach steht:
+  
   
 
  
@@ -220,6 +248,15 @@ int main(int argc, const char * argv[]) {
   // zugMachen("e2-e4");
   
   zugMachen("e2-e4");
+  zugMachen("a7-a5");
+  zugMachen("e4-e5");
+  zugMachen("d7-d5");
+  zugMachen("e5-d6"); 
+  
+  /*
+   En passant testen:
+   
+   */
 
   
   

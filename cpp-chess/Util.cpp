@@ -7,8 +7,18 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <vector>
+#include <array>
+#include <algorithm>
+
 
 using namespace std;
+
+// Dieses Struct dient zum zusammenfassen von angriffen für beide seiten in der variable "angriffe".
+struct angriffeType {
+  vector<array<int, 2>> weiß;
+  vector<array<int, 2>> schwarz;
+};
 
 
 string koordinaten[8][8] = {
@@ -57,6 +67,27 @@ int *figurFinden(char figurZeichen, char brettState[8][8]) {
   return position;
 };
 
+// hierfür wird ein array von vectoren behandelt oder ein set oder eine map - also etwas mit zwei values.
+
+
+angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
+  angriffeType angriffe;
+  // angriffe.weiß dient als angegriffeneFelderWeiß alternative in der JS. Analog für angriffe.schwarz.
+  
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      char figur = brettState[i][j];
+      int figurPos[2] = {i, j};
+      
+      if (figur == 'P') {
+        // hier über alle angriffe der weißen bauern iterieren. 
+      }
+    }
+  }
+  
+  
+  return angriffe;
+}
 
 
 void sayHello() {

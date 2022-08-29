@@ -10,6 +10,7 @@
 		BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF13874628B8C15700BCE4A9 /* Pawn.cpp */; };
 		BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAF428B7AC3C00AD7E12 /* main.cpp */; };
 		BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAFB28B7AD6900AD7E12 /* Util.cpp */; };
+		BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFEBFAA328BCFD510097E2A9 /* Knight.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		BF86BAF428B7AC3C00AD7E12 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF86BAFB28B7AD6900AD7E12 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		BF86BAFD28B7AD7700AD7E12 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		BFEBFAA328BCFD510097E2A9 /* Knight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Knight.cpp; sourceTree = "<group>"; };
+		BFEBFAA528BCFD5E0097E2A9 /* Knight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Knight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				BF86BAFD28B7AD7700AD7E12 /* Util.h */,
 				BF13874628B8C15700BCE4A9 /* Pawn.cpp */,
 				BF13874928B8C1F400BCE4A9 /* Pawn.h */,
+				BFEBFAA328BCFD510097E2A9 /* Knight.cpp */,
+				BFEBFAA528BCFD5E0097E2A9 /* Knight.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */,
 				BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */,
 				BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */,
 				BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */,

@@ -53,12 +53,15 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
     // Im folgenden code wird std::find genutzt, welches true returnt, wenn ein wert (letzter parameter) im definierten spektrum liegt
     // testen, ob weiß nach rechts-oben schlagen kann. Dafür muss getestet werden, ob brettState eine von mehreren chars an einer stelle enthält
-    if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j + 1])) {
+    
+    
+    // klappt, aber habe ehrlich gesagt kaum eine idee, was diese konstellation der find()-methode macht.
+    if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j + 1]) != schwarzeFiguren  + 6) {
       cout << "gegenerische schlagbare figur steht oben rechts von weißem bauern" << endl;
     }
     
     // testen, ob weiß nach oben-links schlagen kann
-    if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j - 1])) {
+    if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j - 1]) != schwarzeFiguren + 6) {
       cout << "gegnerische, schlagbare figur steht oben links von weißem bauern" << endl;
     }
     
@@ -66,11 +69,16 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     // testen, ob en-passant möglich ist:
     
     if (enPassantBauer != NULL) {
+      cout << "Oben rechts: ";
+      cout << brettState[i][j + 1] << endl;
       // en-passant nach oben rechts (von weiß aus). Eventuell muss umgeschrieben werden, an dieser stelle in JS .includes() verwendet.
       if (brettState[i][j + 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[i] == j + 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << j + 1 << "möglich" << endl;
       }
       
+      
+      cout << "Oben links: ";
+      cout << brettState[i][j - 1] << endl; 
       // en-passnat nach links (von weiß aus). Selbes spiel wie eben, muss vielleicht überschrieben werden
       if (brettState[i][j - 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << j - 1 << "möglich" << endl;
