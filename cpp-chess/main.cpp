@@ -9,7 +9,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <cstring>
+#include <vector>
 #include "Util.h"
+#include "Pawn.h"
 
 using namespace std;
 
@@ -161,6 +163,40 @@ void zugMachen(string zugNotation)
   // könnte vielleicht anstatt zwei mal function call einmalig in array gespeichert und dann daraus entnommen werden. 
   int iAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[0];
   int jAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[1];
+  
+  int iZielfeld = feldbezeichnungZuKoord(zielfeld)[0];
+  int jZielfeld = feldbezeichnungZuKoord(zielfeld)[1];
+  
+  
+  char figurZeichen = brettState[iAusgangsfeld][jAusgangsfeld];
+  
+  // nötig um es den einzelnen figuren für die möglichen Züge als Ausgangslage zu übergeben.
+  int ausgangsfeldKoord[2] = {1, 2};
+  
+  
+  // die möglichen Züge der Figur. Als vektor, damit geadded werden kann
+  vector<string> moeglicheZuege;
+  
+  switch (figurZeichen) {
+    case 'P':
+    case 'p':
+      
+
+      // bekommt ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer.
+      moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
+      break;
+      
+  }
+  
+  
+  
+
+  
+  // den zug einfach testweise mal durchführen:
+  
+  
+  
+  
 
  
 };
@@ -173,7 +209,7 @@ int main(int argc, const char * argv[]) {
   
   zugMachen("e2-e4");
 
-
+  
   
   brettAusgeben();
 

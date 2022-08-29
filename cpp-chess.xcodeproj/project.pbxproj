@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF13874628B8C15700BCE4A9 /* Pawn.cpp */; };
 		BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAF428B7AC3C00AD7E12 /* main.cpp */; };
 		BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAFB28B7AD6900AD7E12 /* Util.cpp */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF13874628B8C15700BCE4A9 /* Pawn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Pawn.cpp; sourceTree = "<group>"; };
+		BF13874928B8C1F400BCE4A9 /* Pawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pawn.h; sourceTree = "<group>"; };
 		BF86BAF128B7AC3C00AD7E12 /* cpp-chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cpp-chess"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF86BAF428B7AC3C00AD7E12 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF86BAFB28B7AD6900AD7E12 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				BF86BAF428B7AC3C00AD7E12 /* main.cpp */,
 				BF86BAFB28B7AD6900AD7E12 /* Util.cpp */,
 				BF86BAFD28B7AD7700AD7E12 /* Util.h */,
+				BF13874628B8C15700BCE4A9 /* Pawn.cpp */,
+				BF13874928B8C1F400BCE4A9 /* Pawn.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */,
 				BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */,
 				BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */,
 			);
