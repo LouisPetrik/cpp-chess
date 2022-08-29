@@ -19,8 +19,6 @@
 using namespace std; 
 
 
-void pawnFunction(int num);
-
 vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug, int enPassantBauer[2]);
 
 

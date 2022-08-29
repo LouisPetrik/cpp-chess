@@ -15,11 +15,8 @@
 
 using namespace std; 
 
-void pawnFunction(int num) {
-  cout << "testing Pawn.cpp" << endl;
-}
 
-
+// Listen der Zeichen der einzelnen Figuren, zur Erkennung von eigenen/gegnerischen Figuren auf dem Feld.
 const char schwarzeFiguren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
 const char weißeFiguren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
 
@@ -49,7 +46,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
         
       }
-    }
+    }g
     
     // Im folgenden code wird std::find genutzt, welches true returnt, wenn ein wert (letzter parameter) im definierten spektrum liegt
     // testen, ob weiß nach rechts-oben schlagen kann. Dafür muss getestet werden, ob brettState eine von mehreren chars an einer stelle enthält
@@ -67,7 +64,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
     
     // testen, ob en-passant möglich ist:
-    
+    // vermutlich kann man auch einfach !enPassantBauer, aber idk wie C++ das sieht.
     if (enPassantBauer != NULL) {
       cout << "Oben rechts: ";
       cout << brettState[i][j + 1] << endl;
@@ -79,12 +76,58 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
       
       cout << "Oben links: ";
       cout << brettState[i][j - 1] << endl; 
-      // en-passnat nach links (von weiß aus). Selbes spiel wie eben, muss vielleicht überschrieben werden
+      // en-passant nach oben-links (von weiß aus). Selbes spiel wie eben, muss vielleicht überschrieben werden
       if (brettState[i][j - 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << j - 1 << "möglich" << endl;
       }
     }
   
+  }
+  
+  // selber ablauf, nur für die schwarzen bauern
+  if (!weißAmZug) {
+    if (brettState[i + 1][j] == '.') {
+     
+      zuege.push_back({{i + 1, j}});
+      
+      if (brettState[i + 2][j] == '.' && i == 1) {
+        zuege.push_back({{ i + 1, j }});
+      }
+      
+      
+    }
+    
+    // testen, ob schwarz nach unten-rechts schlagen kann (unten-rechts aus weißer sicht aufs brett)
+    if (std::find(weißeFiguren, weißeFiguren + 6, brettState[i + 1][j + 1]) != weißeFiguren + 6) {
+      zuege.push_back({{i + 1, j + 1}});
+      
+    }
+    
+    // testen, ob schwarz nach unten-links schlagen kann.
+    if (std::find(weißeFiguren, weißeFiguren + 6, brettState[i + 1][j - 1]) != weißeFiguren + 6) {
+      zuege.push_back({{i + 1, j - 1}});
+      
+    }
+    
+    // testen, ob en-passant geschlagen werden kann:
+    if (enPassantBauer != NULL) {
+      // ob en passant nach rechts geschlagen werden kann:
+      
+      if (brettState[i][j + 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
+        zuege.push_back({{i + 1, j + 1}});
+        
+        cout << "Schwarz: En passant schlagen mit ziel " << i + 1 << " " << j + 1 << " möglich" << endl;
+      }
+      
+      // ob en passant nach links geschlagen werden kann:
+      if (brettState[i][j - 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
+        zuege.push_back({{ i + 1, j - 1 }});
+        
+        cout << "Schwarz: En passant schlagen mit ziel " << i + 1 << " " << j - 1 << " möglich" << endl;
+      }
+      
+    }
+    
   }
   
   

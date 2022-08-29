@@ -123,6 +123,10 @@ void brettAusgeben() {
 
 void zugMachen(string zugNotation)
 {
+  
+  
+  cout << "-------------------------------" << endl;
+  cout << "Zug: " << halbzugNummer << endl; 
 
   cout << "Uebergeben: " << endl;
   cout << zugNotation << endl;
@@ -135,6 +139,8 @@ void zugMachen(string zugNotation)
   {
     cout << "Weiß ist am Zug" << endl;
   }
+  
+
 
   // wird eigentlich erst später inkrementiert, wenn der zug auch legitim war:
   halbzugNummer++;
@@ -223,8 +229,7 @@ void zugMachen(string zugNotation)
   
   // über den vector von möglichen zügen iterieren:
   
-  
-  cout << "hello world" << endl;
+
   
   
   //
