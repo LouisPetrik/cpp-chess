@@ -31,6 +31,9 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
   const int i = ausgangsfeldKoord[0];
   const int j = ausgangsfeldKoord[1];
   
+  cout << "Position des Bauerns: ";
+  cout << "i: " << i << " j: " << j << endl; 
+  
   if (weißAmZug) {
     if (brettState[i - 1][j] == '.') {
       // hier muss irgendwie ein anonymer array erstellt werden.
@@ -51,12 +54,12 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     // Im folgenden code wird std::find genutzt, welches true returnt, wenn ein wert (letzter parameter) im definierten spektrum liegt
     // testen, ob weiß nach rechts-oben schlagen kann. Dafür muss getestet werden, ob brettState eine von mehreren chars an einer stelle enthält
     if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j + 1])) {
-      cout << "gegenerische schlagbare figur steht oben rechts von weißem bauern";
+      cout << "gegenerische schlagbare figur steht oben rechts von weißem bauern" << endl;
     }
     
     // testen, ob weiß nach oben-links schlagen kann
     if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j - 1])) {
-      cout << "gegnerische, schlagbare figur steht oben links von weißem bauern";
+      cout << "gegnerische, schlagbare figur steht oben links von weißem bauern" << endl;
     }
     
     

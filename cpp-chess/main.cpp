@@ -164,6 +164,8 @@ void zugMachen(string zugNotation)
   int iAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[0];
   int jAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[1];
   
+
+  
   int iZielfeld = feldbezeichnungZuKoord(zielfeld)[0];
   int jZielfeld = feldbezeichnungZuKoord(zielfeld)[1];
   
@@ -171,31 +173,41 @@ void zugMachen(string zugNotation)
   char figurZeichen = brettState[iAusgangsfeld][jAusgangsfeld];
   
   // nötig um es den einzelnen figuren für die möglichen Züge als Ausgangslage zu übergeben.
-  int ausgangsfeldKoord[2] = {1, 2};
+  int ausgangsfeldKoord[2] = {iAusgangsfeld, jAusgangsfeld};
   
   
   // die möglichen Züge der Figur. Als vektor, damit geadded werden kann
-  vector<string> moeglicheZuege;
+  vector<array<int, 2>> moeglicheZuege;
+  
   
   switch (figurZeichen) {
+    
     case 'P':
     case 'p':
-      
 
       // bekommt ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer.
-      moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
+      moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
+      
+      
+      cout << "Anzahl möglicher Züge: " << endl; 
+      cout << moeglicheZuege.size() << endl;
+      
+      
       break;
       
   }
   
+  // über den vector von möglichen zügen iterieren:
+  
+  
+  cout << "hello world" << endl;
   
   
 
   
   // den zug einfach testweise mal durchführen:
-  
-  
-  
+  brettState[iAusgangsfeld][jAusgangsfeld] = '.';
+  brettState[iZielfeld][jZielfeld] = figurZeichen;
   
 
  
