@@ -197,7 +197,7 @@ void zugMachen(string zugNotation)
       
       
       
-      cout << "Anzahl möglicher Züge: " << endl; 
+      cout << "Anzahl möglicher Züge: "; 
       cout << moeglicheZuege.size() << endl;
       
       
@@ -280,7 +280,7 @@ void zugMachen(string zugNotation)
 
 
 // führt direkt einen zug auf dem brett state aus:
-// Funktion für Maxi, wird in diesem Code hier nicht genutzt und dient dazu, zug direkt in brett state zu bringen. 
+// Funktion für Maxi, wird in diesem Code hier nicht genutzt und dient dazu, zug direkt in brett state zu bringen.
 void zugAusfuehren(string zugNotation) {
   
   string ausgangsfeld = zugNotation.substr(0, 2);
@@ -308,10 +308,13 @@ int main(int argc, const char * argv[]) {
   
   
   zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  /*
   zugMachen("a7-a5");
   zugMachen("e4-e5");
   zugMachen("d7-d5");
   zugMachen("e5-d6");
+   */
   
   
   /*

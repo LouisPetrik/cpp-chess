@@ -28,19 +28,15 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
   
   if (weißAmZug) {
     if (brettState[i - 1][j] == '.') {
-      // hier muss irgendwie ein anonymer array erstellt werden.
-      // es gibt hoffentlich eine bessere lösung als diese komische syntax
-      array<int, 2> zug { {i - 1, j} };
-      zuege.push_back(zug);
+
+      zuege.push_back({{i - 1, j }});
       
-      if (brettState[i + 2][j] == '.' && i == 1) {
-        // bin mir nicht sicher, ob das zuverlässig funktioniert da "zug" schon existiert.
-        array<int, 2> zug { {i + 2, j } };
-        
-        zuege.push_back(zug);
-    
-        
+      if (i == 6) {
+        if (brettState[i - 2][j] == '.') {
+          zuege.push_back({{ i - 2, j }});
+        }
       }
+      
     }
     
     // Im folgenden code wird std::find genutzt, welches true returnt, wenn ein wert (letzter parameter) im definierten spektrum liegt
@@ -81,6 +77,8 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j - 1 << "möglich" << endl;
       }
     }
+    
+
   
   }
   
@@ -91,7 +89,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
       zuege.push_back({{i + 1, j}});
       
       if (brettState[i + 2][j] == '.' && i == 1) {
-        zuege.push_back({{ i + 1, j }});
+        zuege.push_back({{ i + 2, j }});
       }
       
       
