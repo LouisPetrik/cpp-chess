@@ -278,11 +278,33 @@ void zugMachen(string zugNotation)
  
 };
 
+
+// führt direkt einen zug auf dem brett state aus:
+// Funktion für Maxi, wird in diesem Code hier nicht genutzt und dient dazu, zug direkt in brett state zu bringen. 
+void zugAusfuehren(string zugNotation) {
+  
+  string ausgangsfeld = zugNotation.substr(0, 2);
+  string zielfeld = zugNotation.substr(3);
+  
+  int iAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[0];
+  int jAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[1];
+  
+  int iZielfeld = feldbezeichnungZuKoord(zielfeld)[0];
+  int jZielfeld = feldbezeichnungZuKoord(zielfeld)[1];
+  
+  char figurZeichen = brettState[iAusgangsfeld][jAusgangsfeld];
+  
+  brettState[iAusgangsfeld][jAusgangsfeld] = '.';
+  brettState[iZielfeld][jZielfeld] = figurZeichen;
+  
+}
+
 int main(int argc, const char * argv[]) {
   
   
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
+  
   
   
   zugMachen("e2-e4");
