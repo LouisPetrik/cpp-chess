@@ -193,12 +193,19 @@ void zugMachen(string zugNotation)
     case 'p':
 
       // bekommt ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer.
+      // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
       
       
-      cout << "Anzahl möglicher Züge: "; 
+      cout << "Anzahl möglicher Züge: ";
       cout << moeglicheZuege.size() << endl;
+      cout << "Die möglichen Züge: " << endl;
+      
+      for (array<int, 2> zugArr : moeglicheZuege) {
+        cout << zugArr[0] << ", " << zugArr[1] << endl;
+        
+      }
       
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -307,15 +314,21 @@ int main(int argc, const char * argv[]) {
   
   
   
-  zugMachen("e2-e4");
-  zugMachen("e7-e5");
   /*
+  zugMachen("e2-e4");
   zugMachen("a7-a5");
   zugMachen("e4-e5");
   zugMachen("d7-d5");
   zugMachen("e5-d6");
-   */
+
+  */
   
+  zugMachen("a2-a4");
+  zugMachen("e7-e5");
+  zugMachen("a4-a5");
+  zugMachen("e5-e4");
+  zugMachen("d2-d4");
+  zugMachen("e4-d3"); 
   
   /*
    En passant testen:

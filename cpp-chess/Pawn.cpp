@@ -46,27 +46,31 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     // klappt, aber habe ehrlich gesagt kaum eine idee, was diese konstellation der find()-methode macht.
     if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j + 1]) != schwarzeFiguren  + 6) {
       cout << "gegenerische schlagbare figur steht oben rechts von weißem bauern" << endl;
+      
+      zuege.push_back({{ i - 1, j + 1}});
     }
     
     // testen, ob weiß nach oben-links schlagen kann
     if (std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[i - 1][j - 1]) != schwarzeFiguren + 6) {
       cout << "gegnerische, schlagbare figur steht oben links von weißem bauern" << endl;
+      
+      zuege.push_back({{ i - 1, j - 1}});
     }
     
     
     // testen, ob en-passant möglich ist:
     // vermutlich kann man auch einfach !enPassantBauer, aber idk wie C++ das sieht.
     if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
-      cout << "rechts vom bauern: ";
-      cout << brettState[i][j + 1] << endl;
+
       // en-passant nach oben rechts (von weiß aus). Eventuell muss umgeschrieben werden, an dieser stelle in JS .includes() verwendet.
       if (brettState[i][j + 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[i] == j + 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j + 1 << " möglich" << endl;
+        
+        zuege.push_back({{i - 1, j + 1}});
+        
       }
       
       
-      cout << "links vom bauern: ";
-      cout << brettState[i][j - 1] << endl;
       
       cout << "En-passant bauer i: " << enPassantBauer[0] << " j: " << enPassantBauer[0] << endl;
      
@@ -75,6 +79,9 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
       // Es scheitert irgendwie gerade an enPassantBauer
       if (brettState[i][j - 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j - 1 << "möglich" << endl;
+        
+        
+        zuege.push_back({{i - 1, j - 1}});
       }
     }
     
@@ -109,16 +116,19 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
     // testen, ob en-passant geschlagen werden kann:
     if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
+  
       // ob en passant nach rechts geschlagen werden kann:
       
       if (brettState[i][j + 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
         zuege.push_back({{i + 1, j + 1}});
         
         cout << "Schwarz: En passant schlagen mit ziel " << i + 1 << " " << j + 1 << " möglich" << endl;
+        
+      
       }
       
       // ob en passant nach links geschlagen werden kann:
-      if (brettState[i][j - 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
+      if (brettState[i][j - 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
         zuege.push_back({{ i + 1, j - 1 }});
         
         cout << "Schwarz: En passant schlagen mit ziel " << i + 1 << " " << j - 1 << " möglich" << endl;
