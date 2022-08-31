@@ -26,7 +26,7 @@ bool koordInnerhalbBrett(int iVariation, int jVariation) {
 }
 
 // hilfsfunktion
-bool zielfeldLegitim(char brettState[8][8], int iVariation, int jVariation, bool weißAmZug) {
+bool zielfeldLegitim(char brettState[8][8], bool weißAmZug, int iVariation, int jVariation) {
   
   if (
     iVariation >= 0 &&
@@ -111,6 +111,60 @@ vector<array<int, 2>> angegriffeneFelderKnight(int ausgangsfeldKoord[2]) {
   
   return felder;
   
+}
+
+
+
+
+vector<array<int, 2>> moeglicheZuegeKnight(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug) {
+  vector<array<int, 2>> zuege;
+  
+  const int i = ausgangsfeldKoord[0];
+  const int j = ausgangsfeldKoord[1];
+  
+  // zielfeldLegitim kriegt folgende argumente: char brettState[8][8], bool weißAmZug,  int iVariation, int jVariation
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i - 2, j - 1)) {
+    zuege.push_back({{i - 2, j - 1}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i - 2, j + 1)) {
+    zuege.push_back({{i - 2, j + 1}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i - 1, j - 2)) {
+    zuege.push_back({{i - 1, j - 2}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i - 1, j + 2)) {
+    zuege.push_back({{i - 1, j + 2}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 1, j - 2)) {
+    zuege.push_back({{i + 1, j - 2}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 1, j + 2)) {
+    zuege.push_back({{i + 1, j + 2}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 2, j - 1)) {
+    zuege.push_back({{i + 2, j - 1}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 2, j + 1)) {
+    zuege.push_back({{i + 2, j + 1}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 2, j - 1)) {
+    zuege.push_back({{i + 2, j - 1}});
+  }
+  
+  if (zielfeldLegitim(brettState, weißAmZug, i + 2, j + 1)) {
+    zuege.push_back({{i + 2, j + 1}});
+  }
+  
+  return zuege;
 }
 
 
