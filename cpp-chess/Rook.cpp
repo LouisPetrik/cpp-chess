@@ -58,6 +58,8 @@ vector<array<int, 2>> angegriffeneFelderRook(int ausgangsfeldKoord[2], char bret
 }
 
 
+// Muss massiv umgeschrieben werden, bisheriger ansatz kann komplett durch die neue Linie.cpp ersetzt werden.
+
 vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug) {
   vector<array<int, 2>> zuege;
   
