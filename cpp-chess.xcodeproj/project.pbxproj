@@ -10,6 +10,8 @@
 		BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF13874628B8C15700BCE4A9 /* Pawn.cpp */; };
 		BF4683DE28BF822500CD5338 /* Rook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4683DD28BF822500CD5338 /* Rook.cpp */; };
 		BF4683E128BF840700CD5338 /* Linie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4683E028BF840700CD5338 /* Linie.cpp */; };
+		BF60309828C0B3FA003742AE /* diagonale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF60309728C0B3FA003742AE /* diagonale.cpp */; };
+		BF60309D28C0C278003742AE /* Bishop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF60309C28C0C278003742AE /* Bishop.cpp */; };
 		BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAF428B7AC3C00AD7E12 /* main.cpp */; };
 		BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAFB28B7AD6900AD7E12 /* Util.cpp */; };
 		BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFEBFAA328BCFD510097E2A9 /* Knight.cpp */; };
@@ -34,6 +36,10 @@
 		BF4683DF28BF823100CD5338 /* Rook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rook.h; sourceTree = "<group>"; };
 		BF4683E028BF840700CD5338 /* Linie.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Linie.cpp; sourceTree = "<group>"; };
 		BF4683E228BF841200CD5338 /* Linie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Linie.h; sourceTree = "<group>"; };
+		BF60309728C0B3FA003742AE /* diagonale.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = diagonale.cpp; sourceTree = "<group>"; };
+		BF60309928C0B40D003742AE /* diagonale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = diagonale.h; sourceTree = "<group>"; };
+		BF60309C28C0C278003742AE /* Bishop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bishop.cpp; sourceTree = "<group>"; };
+		BF60309E28C0D552003742AE /* Bishop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bishop.h; sourceTree = "<group>"; };
 		BF86BAF128B7AC3C00AD7E12 /* cpp-chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cpp-chess"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF86BAF428B7AC3C00AD7E12 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF86BAFB28B7AD6900AD7E12 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
@@ -83,6 +89,10 @@
 				BF4683DF28BF823100CD5338 /* Rook.h */,
 				BF4683E028BF840700CD5338 /* Linie.cpp */,
 				BF4683E228BF841200CD5338 /* Linie.h */,
+				BF60309728C0B3FA003742AE /* diagonale.cpp */,
+				BF60309928C0B40D003742AE /* diagonale.h */,
+				BF60309C28C0C278003742AE /* Bishop.cpp */,
+				BF60309E28C0D552003742AE /* Bishop.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -144,12 +154,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF60309D28C0C278003742AE /* Bishop.cpp in Sources */,
 				BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */,
 				BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */,
 				BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */,
 				BF4683E128BF840700CD5338 /* Linie.cpp in Sources */,
 				BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */,
 				BF4683DE28BF822500CD5338 /* Rook.cpp in Sources */,
+				BF60309828C0B3FA003742AE /* diagonale.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
