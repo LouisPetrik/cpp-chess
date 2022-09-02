@@ -14,6 +14,7 @@
 		BF60309D28C0C278003742AE /* Bishop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF60309C28C0C278003742AE /* Bishop.cpp */; };
 		BF6030A028C0DA0C003742AE /* Queen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF60309F28C0DA0C003742AE /* Queen.cpp */; };
 		BF6030A328C0DF5D003742AE /* King.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF6030A228C0DF5D003742AE /* King.cpp */; };
+		BF6030A628C0FBD6003742AE /* Castle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF6030A528C0FBD6003742AE /* Castle.cpp */; };
 		BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAF428B7AC3C00AD7E12 /* main.cpp */; };
 		BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAFB28B7AD6900AD7E12 /* Util.cpp */; };
 		BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFEBFAA328BCFD510097E2A9 /* Knight.cpp */; };
@@ -46,6 +47,8 @@
 		BF6030A128C0DA66003742AE /* Queen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queen.h; sourceTree = "<group>"; };
 		BF6030A228C0DF5D003742AE /* King.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = King.cpp; sourceTree = "<group>"; };
 		BF6030A428C0DF96003742AE /* King.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = King.h; sourceTree = "<group>"; };
+		BF6030A528C0FBD6003742AE /* Castle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Castle.cpp; sourceTree = "<group>"; };
+		BF6030A728C0FBE5003742AE /* Castle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Castle.h; sourceTree = "<group>"; };
 		BF86BAF128B7AC3C00AD7E12 /* cpp-chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cpp-chess"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF86BAF428B7AC3C00AD7E12 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF86BAFB28B7AD6900AD7E12 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				BF6030A128C0DA66003742AE /* Queen.h */,
 				BF6030A228C0DF5D003742AE /* King.cpp */,
 				BF6030A428C0DF96003742AE /* King.h */,
+				BF6030A528C0FBD6003742AE /* Castle.cpp */,
+				BF6030A728C0FBE5003742AE /* Castle.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF6030A628C0FBD6003742AE /* Castle.cpp in Sources */,
 				BF60309D28C0C278003742AE /* Bishop.cpp in Sources */,
 				BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */,
 				BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */,
