@@ -58,8 +58,40 @@ vector<array<int, 2>> angegriffeneFelderRook(int ausgangsfeldKoord[2], char bret
 }
 
 
-// Muss massiv umgeschrieben werden, bisheriger ansatz kann komplett durch die neue Linie.cpp ersetzt werden.
+// versuch, diese funktion im neuen stil mit der helfer funktion aus Linie.cpp umzuschreiben:
 
+
+vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug) {
+  
+  
+  vector<array<int, 2>> zuege;
+  
+  // alle felder auf den linien:
+  
+  for (array<int, 2> feld : linieFelder(brettState, ausgangsfeldKoord, "oben", "zuege", weißAmZug)) {
+    zuege.push_back({{ feld[0], feld[1] }});
+  }
+  
+  for (array<int, 2> feld : linieFelder(brettState, ausgangsfeldKoord, "unten", "zuege", weißAmZug)) {
+    zuege.push_back({{ feld[0], feld[1] }});
+  }
+  
+  for (array<int, 2> feld : linieFelder(brettState, ausgangsfeldKoord, "rechts", "zuege", weißAmZug)) {
+    zuege.push_back({{ feld[0], feld[1] }});
+  }
+  
+  for (array<int, 2> feld : linieFelder(brettState, ausgangsfeldKoord, "links", "zuege", weißAmZug)) {
+    zuege.push_back({{ feld[0], feld[1] }});
+  }
+  
+  
+  return zuege;
+}
+
+
+
+// Muss massiv umgeschrieben werden, bisheriger ansatz kann komplett durch die neue Linie.cpp ersetzt werden.
+/*
 vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug) {
   vector<array<int, 2>> zuege;
   
@@ -68,6 +100,7 @@ vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettSta
   const int j = ausgangsfeldKoord[1];
   
   for (int iTemp = i - 1; iTemp >= 0; iTemp--) {
+    
     if (weißAmZug) {
       // std::find(weißeFiguren, weißeFiguren + 6, brettState[iTemp][jTemp])
       if (std::find(weißeFiguren, weißeFiguren + 6, brettState[iTemp][j])) {
@@ -186,8 +219,11 @@ vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettSta
       }
     }
   }
+  
+  cout << "Rook.cpp, länge zuege: " << zuege.size() << endl;
   return zuege; 
 }
 
 
 
+*/

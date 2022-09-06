@@ -91,6 +91,7 @@ angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
 
 
 void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) {
+  cout << figur << " wurde bewegt" << endl; 
   cout << "Anzahl möglicher Züge: " << moeglicheZuege.size() << endl;
   
   
@@ -105,7 +106,6 @@ void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) 
       {'.', '.', '.', '.', '.', '.', '.', '.'},
   };
   
-  cout << "Die möglichen Züge: " << endl;
   
   for (array<int, 2> zugArr : moeglicheZuege) {
     int i = zugArr[0];
@@ -113,7 +113,7 @@ void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) 
     
     moeglicheZuegeFigur[i][j] = 'X';
     
-    //cout << zugArr[0] << ", " << zugArr[1] << endl;
+    cout << zugArr[0] << ", " << zugArr[1] << endl;
   }
   // nur noch gesamte darstellung ausgeben:
   cout << "---------------" << endl;
