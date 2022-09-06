@@ -205,7 +205,7 @@ void zugMachen(string zugNotation)
       // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Bauer");
+      //moeglicheZuegeAusgeben(moeglicheZuege, "Bauer");
       
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -259,7 +259,7 @@ void zugMachen(string zugNotation)
       
       moeglicheZuege = moeglicheZuegeKnight(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
+      //moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
       
       angegriffeneFelder = angegriffeneFelderKnight(ausgangsfeldKoord);
       
@@ -275,7 +275,7 @@ void zugMachen(string zugNotation)
       
       angegriffeneFelder = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Turm");
+      //moeglicheZuegeAusgeben(moeglicheZuege, "Turm");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Turm");
       
       
@@ -289,7 +289,7 @@ void zugMachen(string zugNotation)
       
       angegriffeneFelder = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
+      //moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Läufer");
       
       break;
@@ -300,7 +300,7 @@ void zugMachen(string zugNotation)
       
       angegriffeneFelder = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
+      //moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Queen");
       
       break;
@@ -314,6 +314,8 @@ void zugMachen(string zugNotation)
       angegriffeneFelder = angegriffeneFelderKing(ausgangsfeldKoord, brettState, weißAmZug);
       
       moeglicheZuegeAusgeben(moeglicheZuege, "König");
+      
+      angegriffeneFelderAusgeben(angegriffeneFelder, "König");
       
       break;
       
@@ -373,6 +375,9 @@ int main(int argc, const char * argv[]) {
   zugMachen("e2-e4");
   zugMachen("e7-e5");
   zugMachen("e1-e2");
+  zugMachen("e8-e7");
+  zugMachen("e2-e1");
+  zugMachen("e7-e8"); 
   
   
   

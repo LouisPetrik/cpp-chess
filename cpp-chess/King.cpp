@@ -9,6 +9,7 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include "Util.h"
 
 
 const char schwarzeFiguren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
@@ -36,9 +37,9 @@ bool zielfeldLegitim(int iVariation, int jVariation, char brettState[8][8], bool
         return false;
       } else {
         if (
-            // das muss hier wieder umgeschrieben werden, da std::find falsch. 
-            (weißAmZug && std::find(weißeFiguren, weißeFiguren + 6, brettState[iVariation][jVariation])) ||
-            (!weißAmZug && std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[iVariation][jVariation]))
+            // sollte jetzt funktionieren 
+            (weißAmZug && istWeißeFigur(brettState[iVariation][jVariation])) ||
+            (!weißAmZug && istSchwarzeFigur(brettState[iVariation][jVariation]))
             ) {
               cout << "könig durch eigene figur geblockt " << endl;
               return false;
