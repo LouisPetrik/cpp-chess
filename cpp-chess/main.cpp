@@ -260,6 +260,8 @@ void zugMachen(string zugNotation)
       
       moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
       
+      break;
+      
       
     case 'R':
     case 'r':
@@ -280,7 +282,10 @@ void zugMachen(string zugNotation)
       cout << "Bishop wurde bewegt!" << endl;
       moeglicheZuege = moeglicheZuegeBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "läufer");
+      angegriffeneFelder = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
+      angegriffeneFelderAusgeben(angegriffeneFelder, "Läufer");
       
       break;
       
@@ -340,19 +345,20 @@ int main(int argc, const char * argv[]) {
   
   // testen der ware-eröffnung für den turm
   
-  zugMachen("a2-a4");
-  zugMachen("e7-e5");
-  zugMachen("a1-a3");
-  zugMachen("e5-e4"); 
-  zugMachen("a3-h3");
+  
   
   
   // testen mit dem bishop opening:
-  /*
+  
   zugMachen("e2-e4");
   zugMachen("e7-e5");
   zugMachen("f1-c4");
-   */
+  zugMachen("g8-f6");
+  zugMachen("c4-d5");
+  
+  
+  
+  
 
   
   

@@ -57,6 +57,7 @@ vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoo
       }
       
       if (modus == "angriff") {
+        // wenn eine eigene oder gegnerische Figur gefunden wird, wird dieses Feld noch aufgenommen, da es angegriffen / gedeckt wird.
         if (brettState[iTemp][jTemp] != '.') {
           felderAufDiagonale.push_back({{iTemp, jTemp}});
           
@@ -102,14 +103,16 @@ vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoo
               break;
             }
       
-          if (iTemp != i && jTemp != j) {
-            felderAufDiagonale.push_back({{iTemp, jTemp}});
-          }
+      }
       
-          // kann vielleicht noch hinsichtlich der anzahl der durchläufe optimiert werden.
-          if (iTemp == 0 || iTemp == 7 || jTemp == 0 || jTemp == 7) {
-            break;
-          }
+      // der standpunkt der figur selbst zählt nicht als angegriffen durch sich selbst und auch nicht als zug
+      if (iTemp != i && jTemp != j) {
+        felderAufDiagonale.push_back({{iTemp, jTemp}});
+      }
+  
+      // kann vielleicht noch hinsichtlich der anzahl der durchläufe optimiert werden.
+      if (iTemp == 0 || iTemp == 7 || jTemp == 0 || jTemp == 7) {
+        break;
       }
     }
   }
