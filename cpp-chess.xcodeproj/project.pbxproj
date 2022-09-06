@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF13874828B8C15700BCE4A9 /* Pawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF13874628B8C15700BCE4A9 /* Pawn.cpp */; };
+		BF20C20A28C7B224001BD724 /* remis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF20C20928C7B224001BD724 /* remis.cpp */; };
 		BF4683DE28BF822500CD5338 /* Rook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4683DD28BF822500CD5338 /* Rook.cpp */; };
 		BF4683E128BF840700CD5338 /* Linie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4683E028BF840700CD5338 /* Linie.cpp */; };
 		BF60309828C0B3FA003742AE /* diagonale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF60309728C0B3FA003742AE /* diagonale.cpp */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		BF13874628B8C15700BCE4A9 /* Pawn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Pawn.cpp; sourceTree = "<group>"; };
 		BF13874928B8C1F400BCE4A9 /* Pawn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pawn.h; sourceTree = "<group>"; };
+		BF20C20928C7B224001BD724 /* remis.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = remis.cpp; sourceTree = "<group>"; };
+		BF20C20B28C7B22E001BD724 /* remis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = remis.h; sourceTree = "<group>"; };
 		BF4683DD28BF822500CD5338 /* Rook.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rook.cpp; sourceTree = "<group>"; };
 		BF4683DF28BF823100CD5338 /* Rook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rook.h; sourceTree = "<group>"; };
 		BF4683E028BF840700CD5338 /* Linie.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Linie.cpp; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				BF6030A428C0DF96003742AE /* King.h */,
 				BF6030A528C0FBD6003742AE /* Castle.cpp */,
 				BF6030A728C0FBE5003742AE /* Castle.h */,
+				BF20C20928C7B224001BD724 /* remis.cpp */,
+				BF20C20B28C7B22E001BD724 /* remis.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				BF4683E128BF840700CD5338 /* Linie.cpp in Sources */,
 				BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */,
 				BF4683DE28BF822500CD5338 /* Rook.cpp in Sources */,
+				BF20C20A28C7B224001BD724 /* remis.cpp in Sources */,
 				BF60309828C0B3FA003742AE /* diagonale.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

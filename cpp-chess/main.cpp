@@ -19,6 +19,7 @@
 #include "King.h"
 #include "Queen.h"
 #include "Castle.h"
+#include "remis.h"
 
 using namespace std;
 
@@ -368,6 +369,15 @@ void zugMachen(string zugNotation)
   }
   
   // jetzt testen, ob irgendeine der beiden seiten matt steht:
+  
+  
+  // testen, ob die position ein remis ist:
+  if (!weißerKingImSchach && !schwarzerKingImSchach) {
+    // farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int enPassantBauer[2], int posWeißerKing[2], int posSchwarzerKing[2])
+    bool istPatt = farbeStehtImPatt(brettState, weißAmZug, angriffeWeiß, angriffeSchwarz, enPassantBauer, posWeißerKing, posSchwarzerKing);
+    cout << "patt: " << istPatt << endl;
+    
+  }
     
     
   // andere seite ist wieder am zug:
