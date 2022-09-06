@@ -18,6 +18,7 @@ using namespace std;
 
 // char brettState[8][8], int ausgangsfeldKoord[2], string richtung, string modus, bool weißAmZug
 
+
 vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoord[2], string richtung, string modus, bool weißAmZug); 
 
 

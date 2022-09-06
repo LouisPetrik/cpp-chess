@@ -331,18 +331,38 @@ int main(int argc, const char * argv[]) {
   // zugMachen("e2-e4");
   
   
-
-  
+  // testen der ware-eröffnung für den turm
+  /*
   zugMachen("a2-a4");
   zugMachen("e7-e5");
   zugMachen("a1-a3");
+  */
   
-  
-  /* testen mit dem bishop opening:
-   zugMachen("e2-e4");
-   zugMachen("e7-e5");
-   zugMachen("f1-c4");
+  // testen mit dem bishop opening:
+  /*
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  zugMachen("f1-c4");
    */
+  
+  zugMachen("d2-d4");
+  zugMachen("d7-d5");
+  zugMachen("c1-f4"); 
+
+  
+  
+  // vorher:
+  /*
+   ---------------
+   . . . . . . . .
+   . . . . . . . .
+   . . . . . . . .
+   . . . . . . . .
+   . . . . . . . .
+   . . . . . . . .
+   . . . . X . X .
+   . . . . . X . .
+   --------------- */
   
 
   

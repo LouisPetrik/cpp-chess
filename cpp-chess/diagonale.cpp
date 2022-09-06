@@ -9,6 +9,9 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include "Util.h"
+
+
 
 
 
@@ -69,7 +72,7 @@ vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoo
       
           if (
             weißAmZug &&
-            std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[iTemp][jTemp])
+            istSchwarzeFigur(brettState[iTemp][jTemp])
           ) {
             felderAufDiagonale.push_back({{iTemp, jTemp}});
           }
@@ -77,7 +80,7 @@ vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoo
           // auf eigene figur gestoßen, feld wird nicht aufgenommen und loop abgebrochen
           if (
             weißAmZug &&
-            std::find(weißeFiguren, weißeFiguren + 6, brettState[iTemp][jTemp])
+            istWeißeFigur(brettState[iTemp][jTemp])
           ) {
             geblockt = true;
             break;
@@ -86,14 +89,14 @@ vector<array<int, 2>> diagonaleFelder(char brettState[8][8], int ausgangsfeldKoo
       
           if (
               !weißAmZug &&
-              std::find(weißeFiguren, weißeFiguren + 6, brettState[iTemp][jTemp])
+              istWeißeFigur(brettState[iTemp][jTemp])
             ) {
               felderAufDiagonale.push_back({{iTemp, jTemp}});
             }
       
           if (
               !weißAmZug &&
-              std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[iTemp][jTemp])
+              istSchwarzeFigur(brettState[iTemp][jTemp])
             ) {
               geblockt = true;
               break;

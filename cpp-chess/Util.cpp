@@ -35,6 +35,25 @@ string koordinaten[8][8] = {
 using namespace std;
 
 
+
+bool istWeißeFigur(char brettChar) {
+  char figuren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
+  char* end = figuren + sizeof(figuren) / sizeof(figuren[0]);
+  char* pos = std::find(figuren, end, brettChar);
+  
+  return (pos != end);
+}
+
+// selbe implementierung für schwarz, beide funktionen können noch zu einer zusammengefasst werden.
+bool istSchwarzeFigur(char brettChar) {
+  char figuren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
+  char* end = figuren + sizeof(figuren) / sizeof(figuren[0]);
+  char* pos = std::find(figuren, end, brettChar);
+  
+  return (pos != end);
+}
+
+
 int *feldbezeichnungZuKoord(string feld) {
   int position[2];
   

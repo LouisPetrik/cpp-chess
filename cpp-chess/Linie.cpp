@@ -7,32 +7,18 @@
 #include <array>
 #include <iostream>
 #include "Linie.h"
+#include "Util.h"
+
+
 
 using namespace std;
 
 
+// können dann weg.
 const char schwarzeFiguren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
 const char weißeFiguren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
 
 
-// neue funktion, die die bisherige std::find implementierung vermeiden soll
-
-bool istWeißeFigur(char brettChar) {
-  char figuren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
-  char* end = figuren + sizeof(figuren) / sizeof(figuren[0]);
-  char* pos = std::find(figuren, end, brettChar);
-  
-  return (pos != end);
-}
-
-// selbe implementierung für schwarz, beide funktionen können noch zu einer zusammengefasst werden. 
-bool istSchwarzeFigur(char brettChar) {
-  char figuren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
-  char* end = figuren + sizeof(figuren) / sizeof(figuren[0]);
-  char* pos = std::find(figuren, end, brettChar);
-  
-  return (pos != end);
-}
 /**
     Diese funktion gibt alle Koordinaten auf einer Linie aus, je nach Modus - angriff oder zuege, also alle angegriffenen felder auf der linie oder ziehbare felder. Außerdem muss natürlich richtung spezifiziert werden.
   @param brettState  - selbsterklärend
@@ -105,24 +91,26 @@ vector<array<int, 2>> linieFelder(char brettState[8][8], int ausgangsfeldKoord[2
         // insofern eine gegnerische figur gefunden wird, ist das feld noch ziehbar.
         // Wenn es eine eigene figur ist, wird der weg dadurch geblockt und das feld selbst nicht aufgenommen.
         
-        if (weißAmZug && std::find(schwarzeFiguren, schwarzeFiguren +  6, brettState[iTemp][jTemp]) ) {
+        if (weißAmZug && istSchwarzeFigur(brettState[iTemp][jTemp])) {
           felderAufLinie.push_back({{ iTemp, jTemp }});
         }
         
         // auf eigene figur gestoßen, feld wird nicht aufgenommen und loop abgebrochen
-        if (weißAmZug && std::find(weißeFiguren, weißeFiguren +  6, brettState[iTemp][jTemp])) {
+        if (weißAmZug && istWeißeFigur(brettState[iTemp][jTemp])) {
           cout << "es wurde auf eine eigene, weiße figur gestoßen bei " << iTemp << ", " << jTemp << endl;
           cout << "Die figur: " << brettState[iTemp][jTemp] << endl; 
           geblockt = true;
           break;
         }
         
-        if (!weißAmZug && std::find(weißeFiguren, weißeFiguren +  6, brettState[iTemp][jTemp])) {
+        // brettState[iTemp][jTemp]
+        
+        if (!weißAmZug && istWeißeFigur(brettState[iTemp][jTemp])) {
           felderAufLinie.push_back({{iTemp, jTemp}});
         }
         
         // auf eigene figur gestoßen, feld wird nicht aufgenommen und loop abgebrochen
-        if (!weißAmZug && std::find(schwarzeFiguren, schwarzeFiguren +  6, brettState[iTemp][jTemp])) {
+        if (!weißAmZug && istSchwarzeFigur(brettState[iTemp][jTemp])) {
           geblockt = true;
           break;
         }

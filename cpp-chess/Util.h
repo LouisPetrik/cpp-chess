@@ -16,6 +16,10 @@ using namespace std;
 void sayHello();
 
 
+bool istWeißeFigur(char brettChar);
+
+bool istSchwarzeFigur(char brettChar);
+
 int *feldbezeichnungZuKoord(string feld); 
 
 int *figurFinden(char figurZeichen, char brettState[8][8]);
