@@ -36,6 +36,7 @@ bool zielfeldLegitim(int iVariation, int jVariation, char brettState[8][8], bool
         return false;
       } else {
         if (
+            // das muss hier wieder umgeschrieben werden, da std::find falsch. 
             (weißAmZug && std::find(weißeFiguren, weißeFiguren + 6, brettState[iVariation][jVariation])) ||
             (!weißAmZug && std::find(schwarzeFiguren, schwarzeFiguren + 6, brettState[iVariation][jVariation]))
             ) {

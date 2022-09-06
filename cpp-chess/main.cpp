@@ -17,6 +17,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "King.h"
+#include "Queen.h"
 #include "Castle.h"
 
 using namespace std;
@@ -260,6 +261,10 @@ void zugMachen(string zugNotation)
       
       moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
       
+      angegriffeneFelder = angegriffeneFelderKnight(ausgangsfeldKoord);
+      
+      //angegriffeneFelderAusgeben(angegriffeneFelder, "Springer");
+      
       break;
       
       
@@ -271,7 +276,7 @@ void zugMachen(string zugNotation)
       angegriffeneFelder = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
       
       moeglicheZuegeAusgeben(moeglicheZuege, "Turm");
-      angegriffeneFelderAusgeben(angegriffeneFelder, "Turm");
+      //angegriffeneFelderAusgeben(angegriffeneFelder, "Turm");
       
       
       break;
@@ -285,7 +290,30 @@ void zugMachen(string zugNotation)
       angegriffeneFelder = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
       moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
-      angegriffeneFelderAusgeben(angegriffeneFelder, "Läufer");
+      //angegriffeneFelderAusgeben(angegriffeneFelder, "Läufer");
+      
+      break;
+      
+    case 'Q':
+    case 'q':
+      moeglicheZuege = moeglicheZuegeQueen(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      angegriffeneFelder = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
+      //angegriffeneFelderAusgeben(angegriffeneFelder, "Queen");
+      
+      break;
+      
+    
+    case 'K':
+    case 'k':
+      // moeglicheZuegeKing(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug, char angriffeWeiße[8][8], char angriffeSchwarz[8][8])
+      moeglicheZuege = moeglicheZuegeKing(ausgangsfeldKoord, brettState, weißAmZug, angriffeWeiß, angriffeSchwarz);
+      // angegriffeneFelderKing(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug)
+      angegriffeneFelder = angegriffeneFelderKing(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege, "König");
       
       break;
       
@@ -341,6 +369,13 @@ int main(int argc, const char * argv[]) {
   
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
+ 
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  zugMachen("e1-e2");
+  
+  
+  
   
   
   // testen der ware-eröffnung für den turm
@@ -350,12 +385,17 @@ int main(int argc, const char * argv[]) {
   
   // testen mit dem bishop opening:
   
+  
+  
+  /*
+  
   zugMachen("e2-e4");
   zugMachen("e7-e5");
   zugMachen("f1-c4");
   zugMachen("g8-f6");
   zugMachen("c4-d5");
   
+  */
   
   
   
