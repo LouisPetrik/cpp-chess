@@ -202,7 +202,7 @@ void zugMachen(string zugNotation)
       // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
-      moeglicheZuegeAusgeben(moeglicheZuege);
+      moeglicheZuegeAusgeben(moeglicheZuege, "bauer");
       
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -257,7 +257,7 @@ void zugMachen(string zugNotation)
       
       moeglicheZuege = moeglicheZuegeKnight(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege);
+      moeglicheZuegeAusgeben(moeglicheZuege, "springer");
       
       
     case 'R':
@@ -265,8 +265,15 @@ void zugMachen(string zugNotation)
       cout << "Turm wurde bewegt!" << endl;
       moeglicheZuege = moeglicheZuegeRook(ausgangsfeldKoord, brettState, weißAmZug);
       
-      moeglicheZuegeAusgeben(moeglicheZuege);
+      moeglicheZuegeAusgeben(moeglicheZuege, "turm");
       
+      
+    case 'B':
+    case 'b':
+      cout << "Bishop wurde bewegt!" << endl;
+      moeglicheZuege = moeglicheZuegeBishop(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege, "läufer");
       
   }
   
@@ -322,19 +329,17 @@ int main(int argc, const char * argv[]) {
   // zugMachen("e2-e4");
   
   
-  
-  /*
-  zugMachen("e2-e4");
-  zugMachen("a7-a5");
-  zugMachen("e4-e5");
-  zugMachen("d7-d5");
-  zugMachen("e5-d6");
 
-  */
-  
+  /* zum testen der rooks
   zugMachen("a2-a4");
   zugMachen("e7-e5");
-  zugMachen("a1-a3"); 
+  zugMachen("a1-a3"); */
+  
+  
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  zugMachen("f1-c4");
+  
   
 
   

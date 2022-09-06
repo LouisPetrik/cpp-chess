@@ -90,14 +90,40 @@ angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
 }
 
 
-void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege) {
+void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) {
   cout << "Anzahl möglicher Züge: " << moeglicheZuege.size() << endl;
+  
+  
+  char moeglicheZuegeFigur[8][8] = {
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+  };
   
   cout << "Die möglichen Züge: " << endl;
   
   for (array<int, 2> zugArr : moeglicheZuege) {
-    cout << zugArr[0] << ", " << zugArr[1] << endl;
+    int i = zugArr[0];
+    int j = zugArr[1];
+    
+    moeglicheZuegeFigur[i][j] = 'X';
+    
+    //cout << zugArr[0] << ", " << zugArr[1] << endl;
   }
+  // nur noch gesamte darstellung ausgeben:
+  cout << "---------------" << endl;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      cout << moeglicheZuegeFigur[i][j] << " ";
+    }
+    cout << endl;
+  }
+  cout << "---------------" << endl;
 }
 
 

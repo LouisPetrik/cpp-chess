@@ -20,7 +20,7 @@ int *feldbezeichnungZuKoord(string feld);
 
 int *figurFinden(char figurZeichen, char brettState[8][8]);
 
-void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege); 
+void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur);
 
 
 
