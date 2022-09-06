@@ -10,15 +10,19 @@
 #include <vector>
 #include <array>
 #include <algorithm>
+#include "Util.h"
+#include "Pawn.h"
+#include "Knight.h"
+#include "Rook.h"
+#include "Bishop.h"
+#include "Queen.h"
+#include "King.h"
+#include "Queen.h"
+#include "Castle.h"
 
 
 using namespace std;
 
-// Dieses Struct dient zum zusammenfassen von angriffen für beide seiten in der variable "angriffe".
-struct angriffeType {
-  vector<array<int, 2>> weiß;
-  vector<array<int, 2>> schwarz;
-};
 
 
 string koordinaten[8][8] = {
@@ -90,6 +94,9 @@ int *figurFinden(char figurZeichen, char brettState[8][8]) {
 
 
 angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
+  // dieser struct ist folgendermaßen aufgebaut:
+  // angriffe.weiß ist ein vector<array<int, 2>> für die weißen angriffe. Mit denen fangen wir an.
+  
   angriffeType angriffe;
   // angriffe.weiß dient als angegriffeneFelderWeiß alternative in der JS. Analog für angriffe.schwarz.
   
@@ -98,13 +105,86 @@ angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
       char figur = brettState[i][j];
       int figurPos[2] = {i, j};
       
+
+      
+      // erstmal nur für die weißen figuren, zum testen: 
       if (figur == 'P') {
-        // hier über alle angriffe der weißen bauern iterieren. 
+        
+        for (array<int, 2> feld : angegriffeneFelderPawn(figurPos, "weiß")) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
       }
+      
+      if (figur == 'N') {
+        for (array<int, 2> feld : angegriffeneFelderKnight(figurPos)) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'B') {
+        for (array<int, 2> feld : angegriffeneFelderBishop(figurPos, brettState, weißAmZug)) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'R') {
+        for (array<int, 2> feld : angegriffeneFelderRook(figurPos, brettState, weißAmZug)) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'Q') {
+        for (array<int, 2> feld : angegriffeneFelderQueen(figurPos, brettState, weißAmZug)) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'K') {
+        for (array<int, 2> feld : angegriffeneFelderKing(figurPos, brettState, weißAmZug)) {
+          angriffe.weiß.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      
+      if (figur == 'p') {
+        
+        for (array<int, 2> feld : angegriffeneFelderPawn(figurPos, "schwarz")) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'n') {
+        for (array<int, 2> feld : angegriffeneFelderKnight(figurPos)) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'b') {
+        for (array<int, 2> feld : angegriffeneFelderBishop(figurPos, brettState, weißAmZug)) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'r') {
+        for (array<int, 2> feld : angegriffeneFelderRook(figurPos, brettState, weißAmZug)) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'q') {
+        for (array<int, 2> feld : angegriffeneFelderQueen(figurPos, brettState, weißAmZug)) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
+      if (figur == 'k') {
+        for (array<int, 2> feld : angegriffeneFelderKing(figurPos, brettState, weißAmZug)) {
+          angriffe.schwarz.push_back({{feld[0], feld[1]}});
+        }
+      }
+      
     }
   }
-  
-  
   return angriffe;
 }
 

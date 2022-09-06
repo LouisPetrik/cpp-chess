@@ -190,8 +190,11 @@ void zugMachen(string zugNotation)
   
   // die möglichen Züge der Figur. Als vektor, damit geadded werden kann
   vector<array<int, 2>> moeglicheZuege;
-  // erstmal zur zum testen
-  vector<array<int, 2>> angegriffeneFelder;
+  // hält die angriffe der beiden seiten: angegriffeneFelder.weiß und angegriffeneFelder.schwarz.
+  angriffeType angegriffeneFelder;
+  
+  // nur für die angriffe durch eine einzelne figur, nur zum testen:
+  vector<array<int, 2>> angegriffeneFelderFigur;
   
 
   
@@ -261,7 +264,7 @@ void zugMachen(string zugNotation)
       
       //moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
       
-      angegriffeneFelder = angegriffeneFelderKnight(ausgangsfeldKoord);
+      angegriffeneFelderFigur = angegriffeneFelderKnight(ausgangsfeldKoord);
       
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Springer");
       
@@ -273,7 +276,7 @@ void zugMachen(string zugNotation)
       moeglicheZuege = moeglicheZuegeRook(ausgangsfeldKoord, brettState, weißAmZug);
       // int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug
       
-      angegriffeneFelder = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
+      angegriffeneFelderFigur = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
       
       //moeglicheZuegeAusgeben(moeglicheZuege, "Turm");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Turm");
@@ -287,7 +290,7 @@ void zugMachen(string zugNotation)
       cout << "Bishop wurde bewegt!" << endl;
       moeglicheZuege = moeglicheZuegeBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
-      angegriffeneFelder = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
+      angegriffeneFelderFigur = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
       //moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Läufer");
@@ -298,7 +301,7 @@ void zugMachen(string zugNotation)
     case 'q':
       moeglicheZuege = moeglicheZuegeQueen(ausgangsfeldKoord, brettState, weißAmZug);
       
-      angegriffeneFelder = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
+      angegriffeneFelderFigur = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
       
       //moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Queen");
@@ -311,31 +314,62 @@ void zugMachen(string zugNotation)
       // moeglicheZuegeKing(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug, char angriffeWeiße[8][8], char angriffeSchwarz[8][8])
       moeglicheZuege = moeglicheZuegeKing(ausgangsfeldKoord, brettState, weißAmZug, angriffeWeiß, angriffeSchwarz);
       // angegriffeneFelderKing(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug)
-      angegriffeneFelder = angegriffeneFelderKing(ausgangsfeldKoord, brettState, weißAmZug);
+      angegriffeneFelderFigur = angegriffeneFelderKing(ausgangsfeldKoord, brettState, weißAmZug);
       
       moeglicheZuegeAusgeben(moeglicheZuege, "König");
       
-      angegriffeneFelderAusgeben(angegriffeneFelder, "König");
+      angegriffeneFelderAusgeben(angegriffeneFelderFigur, "König");
       
       break;
       
   }
   
-  // über den vector von möglichen zügen iterieren:
-  
-
+  // hier testen, ob der zug überhaupt legitim ist:
   
   
-  //
-
-  
-  // den zug einfach testweise mal durchführen:
+  // den zug aufs brett bringen:
   brettState[iAusgangsfeld][jAusgangsfeld] = '.';
   brettState[iZielfeld][jZielfeld] = figurZeichen;
   
+  
+  // angriffe der beiden farben ermitteln:
+  angegriffeneFelder = angriffeFinden(brettState, weißAmZug);
+  
+  // hier den bisherigen stand der angriffe für beide farben zurücksetzen:
+  angriffeZuruecksetzen();
+  
+  // alle angriffe von weiß einzeichnen:
+  for (array<int, 2> felder : angegriffeneFelder.weiß) {
+    int i = felder[0];
+    int j = felder[1];
+    
+    angriffeWeiß[i][j] = 'A';
+  }
+  
+  
+  // alle angriffe von schwarz einzeichnen:
+  for (array<int, 2> felder : angegriffeneFelder.schwarz) {
+    int i = felder[0];
+    int j = felder[1];
+    
+    angriffeSchwarz[i][j] = 'A';
+  }
+
+  
   // testen, ob einer der beiden könige im schach steht:
+  if (angriffeSchwarz[posWeißerKing[0]][posWeißerKing[1]] == 'A') {
+    weißerKingImSchach = true;
+    cout << "weißer king steht im schach" << endl;
+  }
   
+  if (angriffeWeiß[posSchwarzerKing[0]][posSchwarzerKing[1]] == 'A') {
+    schwarzerKingImSchach = true;
+    cout << "schwarzer king steht im schach" << endl;
+  }
   
+  // jetzt testen, ob irgendeine der beiden seiten matt steht:
+    
+    
   // andere seite ist wieder am zug:
   
   weißAmZug = !weißAmZug;
@@ -371,13 +405,10 @@ int main(int argc, const char * argv[]) {
   
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
- 
+  
   zugMachen("e2-e4");
-  zugMachen("e7-e5");
-  zugMachen("e1-e2");
-  zugMachen("e8-e7");
-  zugMachen("e2-e1");
-  zugMachen("e7-e8"); 
+  zugMachen("d7-d5");
+  zugMachen("f1-b5");
   
   
   
@@ -428,8 +459,18 @@ int main(int argc, const char * argv[]) {
    */
 
   
+  cout << "Angriffe von weiß: " << endl;
+  cout << "-----------------------" << endl;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      cout << angriffeWeiß[i][j] << " ";
+    }
+    cout << endl;
+  }
+  
   
   brettAusgeben();
+  
 
   
   

@@ -11,7 +11,17 @@
 #include <vector>
 #include <iostream>
 
-using namespace std; 
+
+using namespace std;
+
+
+// Dieses Struct dient zum zusammenfassen von angriffen für beide seiten in der variable "angriffe".
+struct angriffeType {
+  vector<array<int, 2>> weiß;
+  vector<array<int, 2>> schwarz;
+};
+
+
 
 void sayHello();
 
@@ -19,6 +29,9 @@ void sayHello();
 bool istWeißeFigur(char brettChar);
 
 bool istSchwarzeFigur(char brettChar);
+
+
+angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug);
 
 int *feldbezeichnungZuKoord(string feld); 
 
