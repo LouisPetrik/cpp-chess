@@ -145,6 +145,42 @@ void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) 
   cout << "---------------" << endl;
 }
 
+// eigentlich die selbe funktion wie oben, aber die hier ist vor allem zum testen - entweder also zusammenfassen oder die hier löschen
+void angegriffeneFelderAusgeben(vector<array<int, 2>> angegriffeneFelder, string figur) {
+  cout << "Angegriffene Felder: " << angegriffeneFelder.size() << endl;
+  
+  
+  char angegriffeneFelderMap[8][8] = {
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+  };
+  
+  
+  for (array<int, 2> zugArr : angegriffeneFelder) {
+    int i = zugArr[0];
+    int j = zugArr[1];
+    
+    angegriffeneFelderMap[i][j] = 'A';
+    
+    cout << zugArr[0] << ", " << zugArr[1] << endl;
+  }
+  // nur noch gesamte darstellung ausgeben:
+  cout << "---------------" << endl;
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      cout << angegriffeneFelderMap[i][j] << " ";
+    }
+    cout << endl;
+  }
+  cout << "---------------" << endl;
+}
+
 
 void sayHello() {
   cout << "hello!" << endl;

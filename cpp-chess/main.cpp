@@ -189,6 +189,8 @@ void zugMachen(string zugNotation)
   
   // die möglichen Züge der Figur. Als vektor, damit geadded werden kann
   vector<array<int, 2>> moeglicheZuege;
+  // erstmal zur zum testen
+  vector<array<int, 2>> angegriffeneFelder;
   
 
   
@@ -262,8 +264,13 @@ void zugMachen(string zugNotation)
     case 'R':
     case 'r':
       moeglicheZuege = moeglicheZuegeRook(ausgangsfeldKoord, brettState, weißAmZug);
+      // int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug
+      
+      angegriffeneFelder = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
       
       moeglicheZuegeAusgeben(moeglicheZuege, "Turm");
+      angegriffeneFelderAusgeben(angegriffeneFelder, "Turm");
+      
       
       break;
       
@@ -336,8 +343,8 @@ int main(int argc, const char * argv[]) {
   zugMachen("a2-a4");
   zugMachen("e7-e5");
   zugMachen("a1-a3");
-  zugMachen("e5-e4");
-  zugMachen("a3-h3"); 
+  zugMachen("e5-e4"); 
+  zugMachen("a3-h3");
   
   
   // testen mit dem bishop opening:

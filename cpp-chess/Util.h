@@ -27,5 +27,7 @@ int *figurFinden(char figurZeichen, char brettState[8][8]);
 void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur);
 
 
+void angegriffeneFelderAusgeben(vector<array<int, 2>>, string figur); 
+
 
 #endif /* Util_h */
