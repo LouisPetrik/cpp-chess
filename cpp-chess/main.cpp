@@ -332,11 +332,13 @@ int main(int argc, const char * argv[]) {
   
   
   // testen der ware-eröffnung für den turm
-  /*
+  
   zugMachen("a2-a4");
   zugMachen("e7-e5");
   zugMachen("a1-a3");
-  */
+  zugMachen("e5-e4");
+  zugMachen("a3-h3"); 
+  
   
   // testen mit dem bishop opening:
   /*
@@ -344,10 +346,6 @@ int main(int argc, const char * argv[]) {
   zugMachen("e7-e5");
   zugMachen("f1-c4");
    */
-  
-  zugMachen("d2-d4");
-  zugMachen("d7-d5");
-  zugMachen("c1-f4"); 
 
   
   

@@ -66,15 +66,7 @@ vector<array<int, 2>> linieFelder(char brettState[8][8], int ausgangsfeldKoord[2
         jTemp = j + x;
       }
       
-      // der standpunkt der figur selbst zählt nicht als angegriffen durch sich selbst:
-      // Genausowenig kann eine figur als legitimen zug auf das feld ziehen, auf dem sie bereits steht
-      // -> wenn das eigene feld durchgegangen wird (else-case) wird der rest der schleife geskipped
-      // hier ist wichtig, dass es ein logisches ODER ist, da sich bei bewegungen über linien i oder j nicht verändern.
-      if (iTemp != i || jTemp != j) {
-        felderAufLinie.push_back({{ iTemp, jTemp }});
-      } else {
-        break;
-      }
+ 
 
       if (modus == "angriff") {
         // wenn eine eigene oder gegnerische Figur gefunden wird, wird dieses Feld noch
@@ -116,6 +108,18 @@ vector<array<int, 2>> linieFelder(char brettState[8][8], int ausgangsfeldKoord[2
         }
         
 
+      }
+      
+      // der standpunkt der figur selbst zählt nicht als angegriffen durch sich selbst:
+      // Genausowenig kann eine figur als legitimen zug auf das feld ziehen, auf dem sie bereits steht
+      // -> wenn das eigene feld durchgegangen wird (else-case) wird der rest der schleife geskipped
+      // hier ist wichtig, dass es ein logisches ODER ist, da sich bei bewegungen über linien i oder j nicht verändern.
+      // dieser teil pusht auch direkt das feld, welches von einer eigenen figur geblockt wird - aber irgendwie nicht in javascript.
+      if (iTemp != i || jTemp != j) {
+        cout << "direkt gepushed: " << iTemp << ", " << jTemp << endl;
+        felderAufLinie.push_back({{ iTemp, jTemp }});
+      } else {
+        break;
       }
     }
   }
