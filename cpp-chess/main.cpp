@@ -12,6 +12,12 @@
 #include <vector>
 #include "Util.h"
 #include "Pawn.h"
+#include "Knight.h"
+#include "Rook.h"
+#include "Bishop.h"
+#include "Queen.h"
+#include "King.h"
+#include "Castle.h"
 
 using namespace std;
 
@@ -196,16 +202,7 @@ void zugMachen(string zugNotation)
       // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
-      
-      
-      cout << "Anzahl möglicher Züge: ";
-      cout << moeglicheZuege.size() << endl;
-      cout << "Die möglichen Züge: " << endl;
-      
-      for (array<int, 2> zugArr : moeglicheZuege) {
-        cout << zugArr[0] << ", " << zugArr[1] << endl;
-        
-      }
+      moeglicheZuegeAusgeben(moeglicheZuege);
       
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -257,6 +254,18 @@ void zugMachen(string zugNotation)
     case 'N':
     case 'n':
       cout << "Springer wurde bewegt!" << endl;
+      
+      moeglicheZuege = moeglicheZuegeKnight(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege);
+      
+      
+    case 'R':
+    case 'r':
+      cout << "Turm wurde bewegt!" << endl;
+      moeglicheZuege = moeglicheZuegeRook(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      moeglicheZuegeAusgeben(moeglicheZuege);
       
       
   }
@@ -325,10 +334,11 @@ int main(int argc, const char * argv[]) {
   
   zugMachen("a2-a4");
   zugMachen("e7-e5");
-  zugMachen("a4-a5");
-  zugMachen("e5-e4");
-  zugMachen("d2-d4");
-  zugMachen("e4-d3"); 
+  zugMachen("a1-a3"); 
+  
+
+  
+  
   
   /*
    En passant testen:

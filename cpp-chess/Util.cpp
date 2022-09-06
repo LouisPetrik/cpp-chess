@@ -90,6 +90,17 @@ angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug) {
 }
 
 
+void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege) {
+  cout << "Anzahl möglicher Züge: " << moeglicheZuege.size() << endl;
+  
+  cout << "Die möglichen Züge: " << endl;
+  
+  for (array<int, 2> zugArr : moeglicheZuege) {
+    cout << zugArr[0] << ", " << zugArr[1] << endl;
+  }
+}
+
+
 void sayHello() {
   cout << "hello!" << endl;
 }
