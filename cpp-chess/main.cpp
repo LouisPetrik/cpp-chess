@@ -425,12 +425,25 @@ int main(int argc, const char * argv[]) {
   zugMachen("f3-f7");
    */
   
-  // testen, ob der fehler auch für diagnolen gilt:
+  // test der schwarzen dame, ob auf der linie geblockt wird:
+  /*
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  zugMachen("g1-f3");
+  zugMachen("d8-f6");
+  zugMachen("b1-c3");
+  zugMachen("f6-f3");
+   */
+  
+  // test der schwarzen dame, ob über die diagonale geblockt wird:
   zugMachen("c2-c4");
   zugMachen("c7-c5");
-  zugMachen("g8-f6");
-  zugMachen("d1-a4");
-  zugMachen("a4-a7");
+  zugMachen("g1-f3");
+  zugMachen("d8-a5");
+  zugMachen("f3-e5");
+  zugMachen("a5-d2");
+  
+ 
   
   
   
