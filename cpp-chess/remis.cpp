@@ -40,7 +40,20 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
         switch (gefundeneFigur) {
           case 'K':
           case 'k':
-            moeglicheZuege = moeglicheZuegeKing(positionFigur, brettState, weißAmZug, angriffeWeiß, angriffeSchwarz); 
+            moeglicheZuege = moeglicheZuegeKing(positionFigur, brettState, weißAmZug, angriffeWeiß, angriffeSchwarz);
+            
+            // insofern es nur einen einzige, erlaubten zug gibt. Nur hier wird direkt überprüft, ob die anzahl moeglicher Züge >= 1, da bei den anderen Figuren
+            // nicht das in-Schach-setzen des eigenen Königs berücksichtigt wird.
+            if (moeglicheZuege.size() >= 1) {
+              istPatt = false;
+            }
+            break;
+          
+          case 'Q':
+          case 'q':
+            moeglicheZuege = moeglicheZuegeQueen(positionFigur, brettState, !weißAmZug);
+            
+            break; 
         }
       }
     }

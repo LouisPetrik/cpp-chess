@@ -212,7 +212,7 @@ void moeglicheZuegeAusgeben(vector<array<int, 2>> moeglicheZuege, string figur) 
     
     moeglicheZuegeFigur[i][j] = 'X';
     
-    cout << zugArr[0] << ", " << zugArr[1] << endl;
+    //cout << zugArr[0] << ", " << zugArr[1] << endl;
   }
   // nur noch gesamte darstellung ausgeben:
   cout << "---------------" << endl;

@@ -116,7 +116,6 @@ vector<array<int, 2>> linieFelder(char brettState[8][8], int ausgangsfeldKoord[2
       // hier ist wichtig, dass es ein logisches ODER ist, da sich bei bewegungen über linien i oder j nicht verändern.
       // dieser teil pusht auch direkt das feld, welches von einer eigenen figur geblockt wird - aber irgendwie nicht in javascript.
       if (iTemp != i || jTemp != j) {
-        cout << "direkt gepushed: " << iTemp << ", " << jTemp << endl;
         felderAufLinie.push_back({{ iTemp, jTemp }});
       } else {
         break;

@@ -304,7 +304,7 @@ void zugMachen(string zugNotation)
       
       angegriffeneFelderFigur = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
       
-      //moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
+      moeglicheZuegeAusgeben(moeglicheZuege, "Queen");
       //angegriffeneFelderAusgeben(angegriffeneFelder, "Queen");
       
       break;
@@ -416,11 +416,21 @@ int main(int argc, const char * argv[]) {
   // muss irgendwie gechanged werden, weil keine string to char conversion möglich
   // zugMachen("e2-e4");
   
+  // die dame direkt ins spiel bringen:
+  /*
   zugMachen("e2-e4");
-  zugMachen("d7-d5");
-  zugMachen("f1-b5");
+  zugMachen("e7-e5");
+  zugMachen("d1-f3");
+  zugMachen("b8-c6");
+  zugMachen("f3-f7");
+   */
   
-  
+  // testen, ob der fehler auch für diagnolen gilt:
+  zugMachen("c2-c4");
+  zugMachen("c7-c5");
+  zugMachen("g8-f6");
+  zugMachen("d1-a4");
+  zugMachen("a4-a7");
   
   
   
