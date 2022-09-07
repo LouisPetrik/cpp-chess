@@ -129,6 +129,70 @@ void brettAusgeben() {
 }
 
 
+// für die Rochade, und auch die damen umwandlung. Rochade ist erstmals nur für Weiß implementiert.
+void sonderzugMachen(string zugNotation) {
+  if (zugNotation == "O-O" && weißAmZug) {
+    // rochadeMoeglich(string typ, bool weißAmZug, char brettState[8][8], char angriffeWeiß[8][8], char angriffeSchwarz);
+    if (weißRochadeKurzMoeglich && rochadeMoeglich("kurz", weißAmZug, brettState, angriffeWeiß, angriffeSchwarz)) {
+      // rochade auf dem brett ausführen:
+      brettState[7][4] = '.';
+      brettState[7][6] = 'K';
+      brettState[7][7] = '.';
+      brettState[7][5] = 'R';
+      
+      weißAmZug = !weißAmZug;
+    } else {
+      cout << "Kurze, weiße Rochade nicht möglich" << endl;
+    }
+  }
+  
+  if (zugNotation == "O-O-O" && weißAmZug) {
+    if (weißRochadeLangMoeglich && rochadeMoeglich("lang", weißAmZug, brettState, angriffeWeiß, angriffeSchwarz)) {
+      // rochade auf dem brett ausführen:
+      brettState[7][4] = '.';
+      brettState[7][2] = 'K';
+
+      brettState[7][0] = '.';
+      brettState[7][3] = 'R';
+      
+      weißAmZug = !weißAmZug;
+    } else {
+      cout << "Lange, weiße Rochade nicht möglich" << endl;
+    }
+  }
+  
+  // bauernverwandelung. Syntax: e7-e8=Q, auf e8 wird zu einer Dame verwandelt, weiß macht das. Wichtig ist, das abgefangen wird, ob dieser Zug
+  // eigenem König Schach gibt und ob der Bauer auf dem Rang überhaupt berechtigt ist.
+  // wenn die Zug Notation an 5. Stelle ein "=" enthält, handelt es sich um eine Verwandelung.
+  if (zugNotation[5] == '=') {
+    cout << "Verwandelung von Bauer zu" << zugNotation[6] << endl;
+    
+    char wunschFigur = zugNotation[6];
+    
+    string ausgangsfeld = zugNotation.substr(0, 2);
+    cout << "ausgangsfeld der verwandelung: " << ausgangsfeld << endl;
+    
+    int iAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[0];
+    int jAusgangsfeld = feldbezeichnungZuKoord(ausgangsfeld)[1];
+    
+    // insofern die verwandelung legitim ist:
+    
+    // bauern auf dem feld entfernen:
+    brettState[iAusgangsfeld][jAusgangsfeld] = '.';
+    
+    // Figur, die erwünscht ist, auf den rang davor bringen:
+    if (weißAmZug) {
+      // im Fall von weiß wird i dekrementiert:
+      brettState[iAusgangsfeld - 1][jAusgangsfeld] = wunschFigur;
+      
+    } else {
+      // im Fall von schwarz wird i inkrementiert:
+      brettState[iAusgangsfeld + 1][jAusgangsfeld] = wunschFigur;
+    }
+    
+  }
+}
+
 void zugMachen(string zugNotation)
 {
   
@@ -440,8 +504,9 @@ int main(int argc, const char * argv[]) {
   zugMachen("c7-c5");
   zugMachen("g1-f3");
   zugMachen("d8-a5");
-  zugMachen("f3-e5");
-  zugMachen("a5-d2");
+  zugMachen("b1-c3");
+  zugMachen("a5-c3");
+  
   
  
   

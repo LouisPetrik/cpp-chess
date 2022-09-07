@@ -52,8 +52,66 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
           case 'Q':
           case 'q':
             moeglicheZuege = moeglicheZuegeQueen(positionFigur, brettState, !weißAmZug);
+            break;
             
-            break; 
+          case 'P':
+          case 'p':
+            moeglicheZuege = moeglicheZuegePawn(positionFigur, brettState, !weißAmZug, enPassantBauer);
+            break;
+            
+          case 'R':
+          case 'r':
+            moeglicheZuege = moeglicheZuegeRook(positionFigur, brettState, !weißAmZug);
+            break;
+            
+          case 'B':
+          case 'b':
+            moeglicheZuege = moeglicheZuegeBishop(positionFigur, brettState, !weißAmZug);
+            break;
+            
+          case 'N':
+          case 'n':
+            moeglicheZuege = moeglicheZuegeKnight(positionFigur, brettState, !weißAmZug);
+            break;
+            
+        }
+        
+        // für jeden einzelnen Zug überprüfen, ob er König in Schach setzen würde:
+        // bisschen anders als in JS, da hier for-each, daher testen nötig
+        for (array<int, 2> zug : moeglicheZuege) {
+          int iZielfeld = zug[0];
+          int jZielfeld = zug[1];
+          
+          // unabhängige Kopie vom brettState machen, auf die alle möglichen Züge aller Figuren gebracht werden.
+          char testBrettState[8][8];
+          // bin mir nicht sicher, ob der noch gefilled werden muss, oder ob das jetzt so gehen sollte.
+          
+          // alles aus dem brettState in die Kopie reinschreiben:
+          for (int z = 0; z < 8; z++) {
+            for (int y = 0; y < 8; y++) {
+              testBrettState[z][y] = brettState[z][y];
+            }
+          }
+          
+          // den möglichen Zug der Figur in den testBrettState:
+          testBrettState[i][j] = '.';
+          testBrettState[iZielfeld][jZielfeld] = gefundeneFigur;
+          
+          // Hier werden die Angriffe zusammengeführt.
+          // weißAmZug auf false ist an dieser Stelle vielleicht nicht richtig
+          angriffeType moeglicheAngegriffeneFelder = angriffeFinden(testBrettState, !weißAmZug);
+          
+          
+          if (weißAmZug) {
+            // hier muss getestet werden, ob die position vom schwarzen König in den moeglichenAngriffen vector<array<int, 2>> ist.
+            // in den angriffen bei: moeglicheAngegriffeneFelder.weiß vom typen wie gesagt.
+            // wenn in den angegriffenen Feldern, NICHT die position vom könig ist, ist es kein patt.
+            
+            // muss später mal gemacht werden.
+          }
+          
+          
+          
         }
       }
     }

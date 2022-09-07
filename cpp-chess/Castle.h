@@ -13,7 +13,6 @@
 #include <array>
 #include <iostream>
 
-
-bool rochadeMoeglich(string typ, bool weißAmZug, char brettState[8][8], char angriffeWeiß[8][8], char angriffeSchwarz); 
+bool rochadeMoeglich(string typ, bool weißAmZug, char brettState[8][8], char angriffeWeiß[8][8], char angriffeSchwarz[8][8]); 
 
 #endif /* Castle_h */
