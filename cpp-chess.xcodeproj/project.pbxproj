@@ -18,6 +18,7 @@
 		BF6030A628C0FBD6003742AE /* Castle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF6030A528C0FBD6003742AE /* Castle.cpp */; };
 		BF86BAF528B7AC3C00AD7E12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAF428B7AC3C00AD7E12 /* main.cpp */; };
 		BF86BAFC28B7AD6900AD7E12 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF86BAFB28B7AD6900AD7E12 /* Util.cpp */; };
+		BF92F18628C8F1690063544F /* EngineUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF92F18528C8F1690063544F /* EngineUtil.cpp */; };
 		BFEBFAA428BCFD510097E2A9 /* Knight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFEBFAA328BCFD510097E2A9 /* Knight.cpp */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		BF86BAF428B7AC3C00AD7E12 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BF86BAFB28B7AD6900AD7E12 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		BF86BAFD28B7AD7700AD7E12 /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		BF92F18528C8F1690063544F /* EngineUtil.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EngineUtil.cpp; sourceTree = "<group>"; };
+		BF92F18728C8F1750063544F /* EngineUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EngineUtil.h; sourceTree = "<group>"; };
 		BFEBFAA328BCFD510097E2A9 /* Knight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Knight.cpp; sourceTree = "<group>"; };
 		BFEBFAA528BCFD5E0097E2A9 /* Knight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Knight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,8 @@
 				BF6030A728C0FBE5003742AE /* Castle.h */,
 				BF20C20928C7B224001BD724 /* remis.cpp */,
 				BF20C20B28C7B22E001BD724 /* remis.h */,
+				BF92F18528C8F1690063544F /* EngineUtil.cpp */,
+				BF92F18728C8F1750063544F /* EngineUtil.h */,
 			);
 			path = "cpp-chess";
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				BF4683DE28BF822500CD5338 /* Rook.cpp in Sources */,
 				BF20C20A28C7B224001BD724 /* remis.cpp in Sources */,
 				BF60309828C0B3FA003742AE /* diagonale.cpp in Sources */,
+				BF92F18628C8F1690063544F /* EngineUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

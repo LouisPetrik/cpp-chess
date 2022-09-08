@@ -20,6 +20,8 @@
 #include "Queen.h"
 #include "Castle.h"
 #include "remis.h"
+#include "EngineUtil.h"
+
 
 using namespace std;
 
@@ -127,6 +129,7 @@ void brettAusgeben() {
   }
   cout << "---------------" << endl;
 }
+
 
 
 // für die Rochade, und auch die damen umwandlung. Rochade ist erstmals nur für Weiß implementiert.
@@ -476,86 +479,9 @@ void zugAusfuehren(string zugNotation) {
 
 int main(int argc, const char * argv[]) {
   
-  
-  // muss irgendwie gechanged werden, weil keine string to char conversion möglich
-  // zugMachen("e2-e4");
-  
-  // die dame direkt ins spiel bringen:
-  /*
-  zugMachen("e2-e4");
-  zugMachen("e7-e5");
-  zugMachen("d1-f3");
-  zugMachen("b8-c6");
-  zugMachen("f3-f7");
-   */
-  
-  // test der schwarzen dame, ob auf der linie geblockt wird:
-  /*
-  zugMachen("e2-e4");
-  zugMachen("e7-e5");
-  zugMachen("g1-f3");
-  zugMachen("d8-f6");
-  zugMachen("b1-c3");
-  zugMachen("f6-f3");
-   */
-  
-  // test der schwarzen dame, ob über die diagonale geblockt wird:
-  zugMachen("c2-c4");
-  zugMachen("c7-c5");
-  zugMachen("g1-f3");
-  zugMachen("d8-a5");
-  zugMachen("b1-c3");
-  zugMachen("a5-c3");
+  // hier die funktion für maxi testen:
   
   
- 
-  
-  
-  
-  // testen der ware-eröffnung für den turm
-  
-  
-  
-  
-  // testen mit dem bishop opening:
-  
-  
-  
-  /*
-  
-  zugMachen("e2-e4");
-  zugMachen("e7-e5");
-  zugMachen("f1-c4");
-  zugMachen("g8-f6");
-  zugMachen("c4-d5");
-  
-  */
-  
-  
-  
-
-  
-  
-  // vorher:
-  /*
-   ---------------
-   . . . . . . . .
-   . . . . . . . .
-   . . . . . . . .
-   . . . . . . . .
-   . . . . . . . .
-   . . . . . . . .
-   . . . . X . X .
-   . . . . . X . .
-   --------------- */
-  
-
-  
-  /*
-   En passant testen:
-   
-   */
-
   
   cout << "Angriffe von weiß: " << endl;
   cout << "-----------------------" << endl;
@@ -568,6 +494,24 @@ int main(int argc, const char * argv[]) {
   
   
   brettAusgeben();
+  
+  // das muss noch irgendwie ausgelagert werden, damit es nicht überall neu definiert werden muss.
+  typedef array<array<char, 8>, 8> brett;
+  
+  // vorher einmal testweise alle angriffe generieren, damit die funktion für den könig die richtigen infos hat?
+  // vector<array<char, 8>>
+  for (brett brettVariante : moeglicheBrettStates(brettState, weißAmZug, enPassantBauer, angriffeWeiß, angriffeSchwarz)) {
+    // jedes einzelne brett ausgeben:
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        cout << brettVariante[i][j] << " ";
+      }
+      cout << endl;
+    }
+    cout << "------------------" << endl; 
+  }
+  
+  
   
 
   
