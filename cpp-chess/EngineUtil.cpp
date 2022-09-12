@@ -19,6 +19,28 @@
 #include "Rook.h"
 
 
+// der folgende code wird folgendermaßen angewendet:
+
+/*
+ // das muss noch irgendwie ausgelagert werden, damit es nicht überall neu definiert werden muss.
+ typedef array<array<char, 8>, 8> brett;
+ 
+ // vorher einmal testweise alle angriffe generieren, damit die funktion für den könig die richtigen infos hat?
+ // vector<array<char, 8>>
+ for (brett brettVariante : moeglicheBrettStates(brettState, weißAmZug, enPassantBauer, angriffeWeiß, angriffeSchwarz)) {
+   // jedes einzelne brett ausgeben:
+   for (int i = 0; i < 8; i++) {
+     for (int j = 0; j < 8; j++) {
+       cout << brettVariante[i][j] << " ";
+     }
+     cout << endl;
+   }
+   cout << "------------------" << endl;
+ }
+ 
+ */
+
+
 using namespace std;
 
 // zweidimensionales array an chars für visuelles brett

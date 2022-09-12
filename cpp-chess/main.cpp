@@ -49,14 +49,14 @@ int enPassantBauer[2] = {0, 0};
 int halbzugNummer = 1;
 
 char brettState[8][8] = {
-    {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-    {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-    {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
+  {'.', '.', '.', '.', '.', '.', '.', '.'},
+  {'.', '.', '.', '.', '.', '.', '.', '.'},
+  {'.', 'K', '.', '.', '.', '.', '.', '.'},
+  {'.', '.', '.', '.', '.', 'Q', '.', '.'},
+  {'.', '.', '.', '.', '.', '.', 'Q', '.'},
+  {'.', '.', '.', '.', '.', '.', '.', '.'},
+  {'.', '.', '.', '.', '.', '.', '.', 'b'},
+  {'.', '.', '.', '.', '.', '.', '.', 'k'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -479,10 +479,13 @@ void zugAusfuehren(string zugNotation) {
 
 int main(int argc, const char * argv[]) {
   
-  // hier die funktion für maxi testen:
+  
+  zugMachen("f5-f3");
+
   
   
   
+  /*
   cout << "Angriffe von weiß: " << endl;
   cout << "-----------------------" << endl;
   for (int i = 0; i < 8; i++) {
@@ -490,32 +493,17 @@ int main(int argc, const char * argv[]) {
       cout << angriffeWeiß[i][j] << " ";
     }
     cout << endl;
-  }
+  }*/
+
   
   
   brettAusgeben();
-  
-  // das muss noch irgendwie ausgelagert werden, damit es nicht überall neu definiert werden muss.
-  typedef array<array<char, 8>, 8> brett;
-  
-  // vorher einmal testweise alle angriffe generieren, damit die funktion für den könig die richtigen infos hat?
-  // vector<array<char, 8>>
-  for (brett brettVariante : moeglicheBrettStates(brettState, weißAmZug, enPassantBauer, angriffeWeiß, angriffeSchwarz)) {
-    // jedes einzelne brett ausgeben:
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        cout << brettVariante[i][j] << " ";
-      }
-      cout << endl;
-    }
-    cout << "------------------" << endl; 
-  }
   
   
   
 
   
-  
+
   angriffeZuruecksetzen();
   
   
