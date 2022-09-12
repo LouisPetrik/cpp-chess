@@ -49,14 +49,14 @@ int enPassantBauer[2] = {0, 0};
 int halbzugNummer = 1;
 
 char brettState[8][8] = {
-    {'K', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', 'R', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', 'b', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', 'k', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', 'P', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', 'k', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', 'K', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -276,7 +276,7 @@ void zugMachen(string zugNotation)
       // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
-      //moeglicheZuegeAusgeben(moeglicheZuege, "Bauer");
+      moeglicheZuegeAusgeben(moeglicheZuege, "Bauer");
       
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -535,8 +535,7 @@ void zugAusfuehren(string zugNotation) {
 int main(int argc, const char * argv[]) {
   
   
-  zugMachen("d6-e6");
-  zugMachen("e3-c4");
+  zugMachen("b7-b8=Q");
 
   
   
