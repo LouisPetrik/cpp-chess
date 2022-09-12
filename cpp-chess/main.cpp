@@ -50,13 +50,13 @@ int halbzugNummer = 1;
 
 char brettState[8][8] = {
       {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', 'P', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', '.', '.', '.', 'k', '.'},
-      {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', '.', '.', '.', 'K', '.'},
+      {'.', '.', '.', '.', '.', 'k', '.', '.'},
+      {'.', '.', 'b', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'R', '.', '.', '.', 'K', '.', 'N', 'R'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -535,21 +535,25 @@ void zugAusfuehren(string zugNotation) {
 int main(int argc, const char * argv[]) {
   
   
-  zugMachen("b7-b8=Q");
-
   
+  zugMachen("g1-f3");
+  zugMachen("c6-b5");
+  sonderzugMachen("O-O");
+  
+
   
   
   /*
-  cout << "Angriffe von weiß: " << endl;
+  
+  cout << "Angriffe von schwarz: " << endl;
   cout << "-----------------------" << endl;
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
-      cout << angriffeWeiß[i][j] << " ";
+      cout << angriffeSchwarz[i][j] << " ";
     }
     cout << endl;
-  }*/
-
+  }
+*/
 
   
   
