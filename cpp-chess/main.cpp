@@ -49,14 +49,14 @@ int enPassantBauer[2] = {0, 0};
 int halbzugNummer = 1;
 
 char brettState[8][8] = {
-  {'.', '.', '.', '.', '.', '.', '.', '.'},
-  {'.', '.', '.', '.', '.', '.', '.', '.'},
-  {'.', 'K', '.', '.', '.', '.', '.', '.'},
-  {'.', '.', '.', '.', '.', 'Q', '.', '.'},
-  {'.', '.', '.', '.', '.', '.', 'Q', '.'},
-  {'.', '.', '.', '.', '.', '.', '.', '.'},
-  {'.', '.', '.', '.', '.', '.', '.', 'b'},
-  {'.', '.', '.', '.', '.', '.', '.', 'k'},
+    {'K', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', 'R', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', 'b', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', 'k', '.', '.', '.'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -392,7 +392,57 @@ void zugMachen(string zugNotation)
       
   }
   
-  // hier testen, ob der zug überhaupt legitim ist:
+  // hier wird final getestet, ob dieser zug nicht den eigenen könig in schach setzen würde.
+  // dafür wird eine veränderte kopie des brettStates übergeben, auf dem der Zug schon ausgeführt ist.
+  
+  // da copy() irgendwie nicht funktioniert, wird die kopie manuell angelegt:
+  char testBrettState[8][8];
+  
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      testBrettState[i][j] = brettState[i][j];
+    }
+  }
+  
+  // den möglichen zug der farbe in den test brett state bringen:
+  testBrettState[iAusgangsfeld][jAusgangsfeld] = '.';
+  testBrettState[iZielfeld][jZielfeld] = figurZeichen;
+    
+  //
+  moeglicheAngriffeZuruecksetzen();
+  
+  // schlägt vermutlich fehlt
+  angriffeType moeglicheAngegriffeneFelder = angriffeFinden(testBrettState, weißAmZug);
+  
+ 
+  
+  // alle möglichen angriffe von weiß nach zug von schwarz einzeichnen, um zu schauen, ob schwarz sich so selbst in schach setzen würde:
+  for (int x = 0; x < moeglicheAngegriffeneFelder.weiß.size(); x++) {
+    int i = moeglicheAngegriffeneFelder.weiß[x][0];
+    int j = moeglicheAngegriffeneFelder.weiß[x][1];
+    
+    moeglicheAngriffeWeiß[i][j] = 'A';
+  }
+  
+
+  // analog für schwarz:
+  for (int x = 0; x < moeglicheAngegriffeneFelder.schwarz.size(); x++) {
+    int i = moeglicheAngegriffeneFelder.schwarz[x][0];
+    int j = moeglicheAngegriffeneFelder.schwarz[x][1];
+    
+    moeglicheAngriffeSchwarz[i][j] = 'A';
+  }
+  
+  
+  // jetzt testen, ob der zug den eigenen könig in schach setzt:
+  if (weißAmZug && moeglicheAngriffeSchwarz[posWeißerKing[0]][posWeißerKing[1]] == 'A') {
+    cout << "Weißer Zug würde dem weißen König Schach geben!" << endl;
+  }
+  
+  if (!weißAmZug && moeglicheAngriffeWeiß[posSchwarzerKing[0]][posSchwarzerKing[1]] == 'A') {
+    cout << "Schwarzer Zug würde dem schwarzen König Schach geben!" << endl;
+  }
+  
   
   
   // den zug aufs brett bringen:
@@ -425,9 +475,12 @@ void zugMachen(string zugNotation)
 
   
   // testen, ob einer der beiden könige im schach steht:
+  // darin jeweils testen, ob einer der beiden könig im matt steht.
   if (angriffeSchwarz[posWeißerKing[0]][posWeißerKing[1]] == 'A') {
     weißerKingImSchach = true;
     cout << "weißer king steht im schach" << endl;
+    
+    
   }
   
   if (angriffeWeiß[posSchwarzerKing[0]][posSchwarzerKing[1]] == 'A') {
@@ -435,14 +488,16 @@ void zugMachen(string zugNotation)
     cout << "schwarzer king steht im schach" << endl;
   }
   
-  // jetzt testen, ob irgendeine der beiden seiten matt steht:
   
   
   // testen, ob die position ein remis ist:
   if (!weißerKingImSchach && !schwarzerKingImSchach) {
     // farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int enPassantBauer[2], int posWeißerKing[2], int posSchwarzerKing[2])
     bool istPatt = farbeStehtImPatt(brettState, weißAmZug, angriffeWeiß, angriffeSchwarz, enPassantBauer, posWeißerKing, posSchwarzerKing);
-    cout << "patt: " << istPatt << endl;
+    
+    if (istPatt) {
+      cout << "Patt! Partie endet mit Remis" << endl;
+    }
     
   }
     
@@ -480,7 +535,8 @@ void zugAusfuehren(string zugNotation) {
 int main(int argc, const char * argv[]) {
   
   
-  zugMachen("f5-f3");
+  zugMachen("d6-e6");
+  zugMachen("e3-c4");
 
   
   
@@ -494,6 +550,7 @@ int main(int argc, const char * argv[]) {
     }
     cout << endl;
   }*/
+
 
   
   
