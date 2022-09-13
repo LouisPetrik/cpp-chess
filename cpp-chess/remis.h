@@ -12,4 +12,6 @@
 
 bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int enPassantBauer[2], int posWeißerKing[2], int posSchwarzerKing[2]);
 
+bool unzureichendesMaterial(char brettState[8][8]); 
+
 #endif /* remis_h */

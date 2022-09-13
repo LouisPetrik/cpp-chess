@@ -49,14 +49,15 @@ int enPassantBauer[2] = {0, 0};
 int halbzugNummer = 1;
 
 char brettState[8][8] = {
-      {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', '.', '.', 'k', '.', '.'},
-      {'.', '.', 'b', '.', '.', '.', '.', '.'},
+    
       {'.', '.', '.', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', 'k', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', 'K', '.'},
+      {'p', '.', '.', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'R', '.', '.', '.', 'K', '.', 'N', 'R'},
+      {'B', '.', '.', '.', '.', '.', '.', '.'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -490,7 +491,7 @@ void zugMachen(string zugNotation)
   
   
   
-  // testen, ob die position ein remis ist:
+  // testen, ob die position ein remis durch patt ist
   if (!weißerKingImSchach && !schwarzerKingImSchach) {
     // farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int enPassantBauer[2], int posWeißerKing[2], int posSchwarzerKing[2])
     bool istPatt = farbeStehtImPatt(brettState, weißAmZug, angriffeWeiß, angriffeSchwarz, enPassantBauer, posWeißerKing, posSchwarzerKing);
@@ -501,6 +502,14 @@ void zugMachen(string zugNotation)
     
   }
     
+  // testen, ob die position ein remis durch unzureichendes material ist.
+  
+  
+  if (unzureichendesMaterial(brettState)) {
+    cout << "Remis wegen unzureichendem Material" << endl;
+  }
+  
+  
     
   // andere seite ist wieder am zug:
   
@@ -536,9 +545,9 @@ int main(int argc, const char * argv[]) {
   
   
   
-  zugMachen("g1-f3");
-  zugMachen("c6-b5");
-  sonderzugMachen("O-O");
+  zugMachen("a1-b2");
+  zugMachen("g6-g7");
+  zugMachen("b2-a3"); 
   
 
   

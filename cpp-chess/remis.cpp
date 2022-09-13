@@ -120,3 +120,65 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
   
   
 }
+
+// Bekommt den brettState nach einem ausgeführten zug übergeben und gibt true / false ob remis durch material mangel zurück.
+bool unzureichendesMaterial(char brettState[8][8]) {
+  // als standard auf true, da quasi umstellung durch gegenbeweis erfolgt.
+  // wird auf false gesetzt, wenn eine Seite eine Dame, einen Turm, einen Bauern oder mehr als einen Läufer / Springer hat
+  bool istRemis = true;
+  
+  
+  // liste der figuren, die insgesamt auf dem brett sind:
+  vector<char> figuren;
+  
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if (brettState[i][j] != '.') {
+        figuren.push_back(brettState[i][j]);
+      }
+    }
+  }
+  
+  
+  cout << "figuren, die noch verfügbar sind: " << endl;
+  
+  int weißeKnights = 0;
+  int schwarzeKnights = 0;
+  
+  int weißeBishops = 0;
+  int schwarzeBishops = 0;
+  
+  
+  for (int i = 0; i < figuren.size(); i++) {
+    char figur = figuren[i];
+    
+    if (figur == 'R' || figur == 'r' || figur == 'Q' || figur == 'q' || figur == 'P' || figur == 'p') {
+      istRemis = false;
+    }
+    
+    if (figur == 'N') {
+      weißeKnights++;
+    }
+    
+    if (figur == 'n') {
+      schwarzeKnights++;
+    }
+    
+    
+    if (figur == 'B') {
+      weißeBishops++;
+    }
+    
+    if (figur == 'b') {
+      schwarzeBishops++;
+    }
+  }
+  
+  if (weißeKnights > 1 || weißeBishops > 1 || schwarzeKnights > 1 || schwarzeBishops > 1) {
+    istRemis = false; 
+  }
+  
+  return istRemis;
+
+  
+}
