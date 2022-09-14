@@ -21,6 +21,7 @@
 #include "Castle.h"
 #include "remis.h"
 #include "EngineUtil.h"
+#include "check.h"
 
 
 using namespace std;
@@ -481,12 +482,23 @@ void zugMachen(string zugNotation)
     weißerKingImSchach = true;
     cout << "weißer king steht im schach" << endl;
     
+    // auf matt testen:
+    // vector<array<int, 2>> istMatt(char brettState[8][8], string schachGegen, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int posBetroffenerKing[2], int enPassantBauer[2])
+    if (istMatt(brettState, "weiß", angriffeWeiß, angriffeSchwarz, posWeißerKing, enPassantBauer).size() == 0) {
+      cout << "Schachmatt! " << endl;
+    }
+    
     
   }
   
   if (angriffeWeiß[posSchwarzerKing[0]][posSchwarzerKing[1]] == 'A') {
     schwarzerKingImSchach = true;
     cout << "schwarzer king steht im schach" << endl;
+    
+    // auch hier auf matt testen:
+    if (istMatt(brettState, "schwarz", angriffeWeiß, angriffeSchwarz, posSchwarzerKing, enPassantBauer).size() == 0) {
+      cout << "Schachmatt! " << endl;
+    }
   }
   
   

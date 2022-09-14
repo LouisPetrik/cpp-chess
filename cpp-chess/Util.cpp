@@ -262,6 +262,14 @@ void angegriffeneFelderAusgeben(vector<array<int, 2>> angegriffeneFelder, string
 }
 
 
-void sayHello() {
-  cout << "hello!" << endl;
+// Diese funktion gibt zurück ob ein i,j-definiertes feld einer figur in einem vektor von angriffen steht.
+bool feldInAngriffen(vector<array<int, 2>> angriffe, int pos[2]) {
+  for (auto angriff : angriffe) {
+    if (angriff[0] == pos[0]) {
+      if (angriff[1] == pos[1]) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
