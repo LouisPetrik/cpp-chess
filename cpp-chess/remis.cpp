@@ -19,6 +19,19 @@
 #include "Queen.h"
 
 
+// Diese funktion gibt zurück ob ein i,j-definiertes feld einer figur in einem vektor von angriffen steht.
+bool feldInAngriffen(vector<array<int, 2>> angriffe, int pos[2]) {
+  for (auto angriff : angriffe) {
+    if (angriff[0] == pos[0]) {
+      if (angriff[1] == pos[1]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+
 
 bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß[8][8], char angriffeSchwarz[8][8], int enPassantBauer[2], int posWeißerKing[2], int posSchwarzerKing[2]) {
   // by default true, da sobald nur ein einziger zug gefunden wurde, der legitim ist, kein patt ist (false returnt wird).
@@ -67,6 +80,8 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
           case 'B':
           case 'b':
             moeglicheZuege = moeglicheZuegeBishop(positionFigur, brettState, !weißAmZug);
+            
+            cout << "Anzahl der möglichen Züge des Bishops: " << moeglicheZuege.size() << endl;
             break;
             
           case 'N':
@@ -76,6 +91,8 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
             
         }
         
+  
+        
         // für jeden einzelnen Zug überprüfen, ob er König in Schach setzen würde:
         // bisschen anders als in JS, da hier for-each, daher testen nötig
         for (array<int, 2> zug : moeglicheZuege) {
@@ -84,7 +101,7 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
           
           // unabhängige Kopie vom brettState machen, auf die alle möglichen Züge aller Figuren gebracht werden.
           char testBrettState[8][8];
-          // bin mir nicht sicher, ob der noch gefilled werden muss, oder ob das jetzt so gehen sollte.
+          // bin mir nicht sicher, ob der noch gefilled werden muss, oder ob das jetzt so gehen sollte.e
           
           // alles aus dem brettState in die Kopie reinschreiben:
           for (int z = 0; z < 8; z++) {
@@ -105,9 +122,22 @@ bool farbeStehtImPatt(char brettState[8][8], bool weißAmZug, char angriffeWeiß
           if (weißAmZug) {
             // hier muss getestet werden, ob die position vom schwarzen König in den moeglichenAngriffen vector<array<int, 2>> ist.
             // in den angriffen bei: moeglicheAngegriffeneFelder.weiß vom typen wie gesagt.
-            // wenn in den angegriffenen Feldern, NICHT die position vom könig ist, ist es kein patt.
+            // wenn in den angegriffenen Feldern, NICHT die position vom könig ist, ist es kein patt. Muss nur einmal der fall sein.
+            if (!feldInAngriffen(moeglicheAngegriffeneFelder.weiß, posSchwarzerKing)) {
+              istPatt = false; 
+              
+            }
             
             // muss später mal gemacht werden.
+          }
+          
+          // analog nur für schwarz
+          if (!weißAmZug) {
+            if (!feldInAngriffen(moeglicheAngegriffeneFelder.schwarz, posWeißerKing)) {
+              istPatt = false;
+              
+            }
+            
           }
           
           
