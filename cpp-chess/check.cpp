@@ -182,14 +182,22 @@ vector<array<int, 2>> istMatt(char brettState[8][8], string schachGegen, char an
     for (int i = 0; i < figuren.size(); i++) {
       const char figur = figuren[i];
       int position[2] = { figurenPos[i][0], figurenPos[i][1] };
+      // inline-kondition, damit nicht für jede farbe eigener funktionsaufruf geschrieben werden muss.
+      // wenn schach gegen weiß, ist weiß natürlich am zug. Als argument für parameter weißAmZug in den funktionen
+      bool weißAmZug = ((schachGegen == "weiß") ? true : false);
+      
+      // jeweils die möglichen Züge für die Figur
+      vector<array<int, 2>> moeglicheZuege;
+      
+      // alle Züge der Figur, die das Schach noch aufheben können
+      vector<array<int, 2>> aufhebendeZuege;
+      
       
       switch (figur) {
         case 'Q':
         case 'q':
-          // diese Inline-Konditionen werden benutzt, damit nicht für je weiß und schwarz jeder Funktionsaufruf pro Figur doppelt vorkommt
-          vector<array<int, 2>> moeglicheZuege = moeglicheZuegeQueen(position, brettState, ((schachGegen == "weiß") ? true : false));
-          
-          vector<array<int, 2>> aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
+          moeglicheZuege = moeglicheZuegeQueen(position, brettState, weißAmZug);
+          aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
           
           if (aufhebendeZuege.size() > 0) {
             for (auto zug : aufhebendeZuege) {
@@ -202,7 +210,59 @@ vector<array<int, 2>> istMatt(char brettState[8][8], string schachGegen, char an
               cout << zug[0] << ", " << zug[1] << endl;
             }
           }
-          break; 
+          
+        case 'B':
+        case 'b':
+          moeglicheZuege = moeglicheZuegeBishop(position, brettState, weißAmZug);
+          aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
+          
+          if (aufhebendeZuege.size() > 0) {
+            for (auto zug : aufhebendeZuege) {
+              legitimeZuege.push_back({{ zug[0], zug[1] }});
+            }
+          }
+      
+          cout << schachGegen << " Läufer kann Schach aufheben" << endl;
+      
+        case 'N':
+        case 'n':
+          moeglicheZuege = moeglicheZuegeKnight(position, brettState, weißAmZug);
+          aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
+          
+          if (aufhebendeZuege.size() > 0) {
+            for (auto zug : aufhebendeZuege) {
+              legitimeZuege.push_back({{ zug[0], zug[1] }});
+            }
+          }
+      
+          cout << schachGegen << " Springer kann Schach aufheben" << endl;
+          
+        case 'R':
+        case 'r':
+          moeglicheZuege = moeglicheZuegeRook(position, brettState, weißAmZug);
+          aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
+          
+          if (aufhebendeZuege.size() > 0) {
+            for (auto zug : aufhebendeZuege) {
+              legitimeZuege.push_back({{ zug[0], zug[1] }});
+            }
+          }
+      
+          cout << schachGegen << " Rook kann Schach aufheben" << endl;
+          
+        case 'P':
+        case 'p':
+          moeglicheZuege = moeglicheZuegePawn(position, brettState, weißAmZug, enPassantBauer);
+          
+          aufhebendeZuege = aufhebendeZuegeFigur(position, moeglicheZuege, brettState, posBetroffenerKing, schachGegen);
+          
+          if (aufhebendeZuege.size() > 0) {
+            for (auto zug : aufhebendeZuege) {
+              legitimeZuege.push_back({{ zug[0], zug[1] }});
+            }
+          }
+      
+          cout << schachGegen << " Bauer kann Schach aufheben" << endl;
           
       }
     }
