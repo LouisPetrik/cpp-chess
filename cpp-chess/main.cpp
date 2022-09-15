@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <cstring>
 #include <vector>
+#include <string>
+
 #include "Util.h"
 #include "Pawn.h"
 #include "Knight.h"
@@ -47,17 +49,27 @@ bool schwarzerKingImSchach = false;
 // Wird auch immer auf 0, 0 zurückgesetzt, da irgendwie auf NULL oder mit delete nicht funktioniert.
 int enPassantBauer[2] = {0, 0};
 
+// "klassicher" Zug, immer wenn eine Seite gezogen hat.
 int halbzugNummer = 1;
+// Zug, nach Schach definition - ein Zug ist beendet, wenn beide Seiten gezogen haben. Damit beginnt der Zug von Weiß immer einen neuen Zug
+// nach dieser Definition.
+int ZugNummer = 0;
+
+
+// Erfässt nach und nach alle Züge, die in der Partie getätigt werden.
+string spielZuege = "";
+
+
 
 char brettState[8][8] = {
+    {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+    {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
     {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', 'p', '.', '.', '.'},
-    {'.', 'K', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', 'R', '.'},
-    {'R', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', 'B', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', 'R', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', 'k'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'.', '.', '.', '.', '.', '.', '.', '.'},
+    {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+    {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -520,6 +532,22 @@ void zugMachen(string zugNotation)
     cout << "Remis wegen unzureichendem Material" << endl;
   }
   
+  // den legitimen zug in die liste der züge speichern.
+  if (weißAmZug) {
+    ZugNummer++;
+    
+    if (ZugNummer > 1) {
+      spielZuege.append(" ");
+    }
+    spielZuege.append(to_string(ZugNummer));
+    spielZuege.append(". ");
+    spielZuege.append(zugNotation);
+    spielZuege.append(" ");
+    
+  } else {
+    spielZuege.append(zugNotation);
+  }
+  
   
     
   // andere seite ist wieder am zug:
@@ -557,35 +585,22 @@ int main(int argc, const char * argv[]) {
   
   
   
-  zugMachen("d3-e4");
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");
+  zugMachen("g1-f3");
+  zugMachen("b8-c6");
+  zugMachen("f1-c4");
  
 
   // matt:
   //zugMachen("f5-f3");
   
-
-  
-  
-
-  
-
-
-
-  
   
   brettAusgeben();
   
-
+  cout << spielZuege << endl;
   
-  
-  
-
-  
-
   angriffeZuruecksetzen();
-  
-  
-  
-  
+
   return 0;
 }
