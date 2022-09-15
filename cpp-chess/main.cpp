@@ -24,12 +24,17 @@
 #include "remis.h"
 #include "EngineUtil.h"
 #include "check.h"
+#include "FischerChess.h"
 
 
 using namespace std;
 
 
+// wenn true, handelt es sich bei der partie um die Variante Fischer Schach. 
+bool fischerSchach = false;
+
 bool weißAmZug = true;
+
 
 int posWeißerKing[2] = {7, 4};
 int posSchwarzerKing[2] = {0, 4};
@@ -582,9 +587,11 @@ void zugAusfuehren(string zugNotation) {
 
 int main(int argc, const char * argv[]) {
   
+  srand(time(0));
   
   
   
+  /*
   zugMachen("e2-e4");
   zugMachen("e7-e5");
   zugMachen("g1-f3");
@@ -601,6 +608,15 @@ int main(int argc, const char * argv[]) {
   cout << spielZuege << endl;
   
   angriffeZuruecksetzen();
+   */
+  
+  
+  for (int i = 0; i < 15; i++) {
+    positionGenerieren();
+  }
+  
+  
+
 
   return 0;
 }
