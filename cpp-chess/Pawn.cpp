@@ -1,4 +1,5 @@
 #include "Pawn.h"
+#include "check.h"
 #include <vector>
 #include <stdio.h>
 #include <iostream>
@@ -19,16 +20,16 @@ const char weißeFiguren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
 vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug, int enPassantBauer[2]) {
   
   vector<array<int, 2>> zuege;
-
+  
   const int i = ausgangsfeldKoord[0];
   const int j = ausgangsfeldKoord[1];
   
   cout << "Position des Bauerns: ";
-  cout << "i: " << i << " j: " << j << endl; 
+  cout << "i: " << i << " j: " << j << endl;
   
   if (weißAmZug) {
     if (brettState[i - 1][j] == '.') {
-
+      
       zuege.push_back({{i - 1, j }});
       
       if (i == 6) {
@@ -61,7 +62,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     // testen, ob en-passant möglich ist:
     // vermutlich kann man auch einfach !enPassantBauer, aber idk wie C++ das sieht.
     if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
-
+      
       // en-passant nach oben rechts (von weiß aus). Eventuell muss umgeschrieben werden, an dieser stelle in JS .includes() verwendet.
       if (brettState[i][j + 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[i] == j + 1) {
         cout << "Für weiß: en passant schlagen mit ziel " << i - 1 << " " << j + 1 << " möglich" << endl;
@@ -73,8 +74,8 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
       
       
       cout << "En-passant bauer i: " << enPassantBauer[0] << " j: " << enPassantBauer[0] << endl;
-     
- 
+      
+      
       // en-passant nach oben-links (von weiß aus). Selbes spiel wie eben, muss vielleicht überschrieben werden
       // Es scheitert irgendwie gerade an enPassantBauer
       if (brettState[i][j - 1] == 'p' && enPassantBauer[0] == i && enPassantBauer[1] == j - 1) {
@@ -85,14 +86,14 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
       }
     }
     
-
-  
+    
+    
   }
   
   // selber ablauf, nur für die schwarzen bauern
   if (!weißAmZug) {
     if (brettState[i + 1][j] == '.') {
-     
+      
       zuege.push_back({{i + 1, j}});
       
       if (brettState[i + 2][j] == '.' && i == 1) {
@@ -116,7 +117,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
     
     // testen, ob en-passant geschlagen werden kann:
     if (enPassantBauer[0] != 0 && enPassantBauer[1] != 0) {
-  
+      
       // ob en passant nach rechts geschlagen werden kann:
       
       if (brettState[i][j + 1] == 'P' && enPassantBauer[0] == i && enPassantBauer[1] == j + 1) {
@@ -124,7 +125,7 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
         
         cout << "Schwarz: En passant schlagen mit ziel " << i + 1 << " " << j + 1 << " möglich" << endl;
         
-      
+        
       }
       
       // ob en passant nach links geschlagen werden kann:
@@ -140,7 +141,31 @@ vector<array<int, 2>> moeglicheZuegePawn(int ausgangsfeldKoord[2], char brettSta
   
   
   
-  return zuege;
+  // hier alle züge auch schachlich korrekt überprüfen:
+   // dieser teil muss quasi genauso für alle anderen figuren übernommen werden. 
+  vector<array<int, 2>> legitimeZuege;
+  
+  char figurZeichen = weißAmZug ? 'P' : 'p';
+  
+  for (auto zug : zuege) {
+    // zielfelder und ausgangslage muss übergeben werden an funktion.
+    // fuck was ist mit schach aufheben durch en-passant?
+    // hier muss ein inliner ob es sich um P oder p für den pawn handelt. Erstmal für den weißen Bauern
+    
+    // zugSchachlichLegitim(array<int, 2> zug, int ausgangsfeldKoord[2], char brettState[8][8], char figurZeichen)
+    
+    
+    if (zugSchachlichLegitim(zug, ausgangsfeldKoord, brettState, figurZeichen, weißAmZug)) {
+      
+      legitimeZuege.push_back({{ zug[0], zug[1] }});
+      
+    } else {
+      cout << "Der Zug: " << zug[0] << ", " << zug[1] << " ist nicht legitim!" << endl;
+    }
+    
+  }
+  
+  return legitimeZuege;
 };
 
 

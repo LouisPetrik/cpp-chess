@@ -21,6 +21,110 @@
 using namespace std;
 
 
+
+// Verhindert, dass der übergebene zug a) den eigenen König in Schach setzt, b) ein gegebenes Schach
+// nicht aufhebt. Ist nur für alle Figuren außer dem König, da dieser in den möglichen Zügen automatisch keine hat,
+// die ihn in Schach setzen. 
+
+bool zugSchachlichLegitim(array<int, 2> zug, int ausgangsfeldKoord[2], char brettState[8][8], char figurZeichen, bool weißAmZug) {
+  
+  // insofern weißerKingImSchach oder schwarzer King im Schach müssen die möglichen Angriffe durch den zug generiert werden
+  
+  // eigentlich muss der zug nur ausgeführt werden, und geschaut werden, ob der eigene könig im schach steht.
+  
+  bool zugLegitim = true;
+  
+  char moeglicheAngriffeSchwarz[8][8] = {
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+  };
+
+  char moeglicheAngriffeWeiß[8][8] = {
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+  };
+  
+  
+  char testBrettState[8][8];
+  
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      testBrettState[i][j] = brettState[i][j];
+    }
+  }
+  
+  int iAusgangsfeld = ausgangsfeldKoord[0];
+  int jAusgangsfeld = ausgangsfeldKoord[1];
+  
+  int iZielfeld = zug[0];
+  int jZielfeld = zug[1];
+  
+  // den möglichen zug der farbe in den test brett state bringen:
+  testBrettState[iAusgangsfeld][jAusgangsfeld] = '.';
+  testBrettState[iZielfeld][jZielfeld] = figurZeichen;
+  
+  // schlägt vermutlich fehlt
+  angriffeType moeglicheAngegriffeneFelder = angriffeFinden(testBrettState, weißAmZug);
+  
+ 
+  
+  // alle möglichen angriffe von weiß nach zug von schwarz einzeichnen, um zu schauen, ob schwarz sich so selbst in schach setzen würde:
+  for (int x = 0; x < moeglicheAngegriffeneFelder.weiß.size(); x++) {
+    int i = moeglicheAngegriffeneFelder.weiß[x][0];
+    int j = moeglicheAngegriffeneFelder.weiß[x][1];
+    
+    moeglicheAngriffeWeiß[i][j] = 'A';
+  }
+  
+
+  // analog für schwarz:
+  for (int x = 0; x < moeglicheAngegriffeneFelder.schwarz.size(); x++) {
+    int i = moeglicheAngegriffeneFelder.schwarz[x][0];
+    int j = moeglicheAngegriffeneFelder.schwarz[x][1];
+    
+    moeglicheAngriffeSchwarz[i][j] = 'A';
+  }
+  
+  int posWeißerKing[2];
+  // das muss noch richtig destructured werden, sonst cringe
+  posWeißerKing[0] = figurFinden('K', brettState)[0];
+  posWeißerKing[1] = figurFinden('K', brettState)[1];
+  
+  int posSchwarzerKing[2];
+  // das muss noch richtig destructured werden, sonst cringe
+  posSchwarzerKing[0] = figurFinden('k', brettState)[0];
+  posSchwarzerKing[1] = figurFinden('k', brettState)[1];
+
+  
+  
+  
+  
+  // jetzt testen, ob der zug den eigenen könig in schach setzt:
+  if (weißAmZug && moeglicheAngriffeSchwarz[posWeißerKing[0]][posWeißerKing[1]] == 'A') {
+    zugLegitim = false;
+    
+  }
+  
+  if (!weißAmZug && moeglicheAngriffeWeiß[posSchwarzerKing[0]][posSchwarzerKing[1]] == 'A') {
+    zugLegitim = false;
+  }
+  
+  return zugLegitim;
+}
+
+
 // Hilfsfunktion, die Züge einer übergebenen Figur zurückgibt, die das Schach aufheben
 // Namen sollten noch optimiert werden, und string für schachGegen auch unnötig -> lieber bool nutzen.
 vector<array<int, 2>> aufhebendeZuegeFigur(int posFigur[2], vector<array<int, 2>> zuege, char brettState[8][8], int posBetroffenerKing[2], string schachGegen) {

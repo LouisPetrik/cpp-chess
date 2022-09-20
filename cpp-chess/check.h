@@ -12,6 +12,8 @@
 
 using namespace std;
 
+bool zugSchachlichLegitim(array<int, 2> zug, int ausgangsfeldKoord[2], char brettState[8][8], char figurZeichen, bool weißAmZug); 
+
 vector<array<int, 2>> aufhebendeZuegeFigur(int posFigur[2], vector<array<int, 2>> zuege, char brettState[8][8], int posBetroffenerKing[2], string schachGegen);
 
 bool istFigurAußerKing(char brettChar, string farbe); 

@@ -67,14 +67,14 @@ string spielZuege = "";
 
 
 char brettState[8][8] = {
-    {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-    {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'.', '.', '.', '.', '.', '.', '.', '.'},
-    {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-    {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
+      {'K', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', 'R', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', 'n', '.', '.', '.'},
+      {'.', '.', '.', '.', '.', '.', '.', '.'},
+      {'.', '.', '.', '.', 'k', '.', '.', '.'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -294,8 +294,12 @@ void zugMachen(string zugNotation)
       // typ des returns: vector<array<int, 2>>
       moeglicheZuege = moeglicheZuegePawn(ausgangsfeldKoord, brettState, weißAmZug, enPassantBauer);
       
-      moeglicheZuegeAusgeben(moeglicheZuege, "Bauer");
-      
+      if (moeglicheZuege.size() == 0) {
+        cout << zielfeld << " Bauer hat hier keinen legitimen zug" << endl;
+      } else {
+        cout << moeglicheZuege.size() << " legitime Züge für den Bauern " << zielfeld << endl;
+      }
+    
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
       
@@ -348,6 +352,12 @@ void zugMachen(string zugNotation)
       
       moeglicheZuege = moeglicheZuegeKnight(ausgangsfeldKoord, brettState, weißAmZug);
       
+      if (moeglicheZuege.size() == 0) {
+        cout << zielfeld << " Springer hat hier keinen legitimen zug" << endl;
+      } else {
+        cout << moeglicheZuege.size() << " legitime Züge für den Springer " << zielfeld << endl;
+      }
+      
       //moeglicheZuegeAusgeben(moeglicheZuege, "Springer");
       
       angegriffeneFelderFigur = angegriffeneFelderKnight(ausgangsfeldKoord);
@@ -361,6 +371,12 @@ void zugMachen(string zugNotation)
     case 'r':
       moeglicheZuege = moeglicheZuegeRook(ausgangsfeldKoord, brettState, weißAmZug);
       // int ausgangsfeldKoord[2], char brettState[8][8], bool weißAmZug
+      
+      if (moeglicheZuege.size() == 0) {
+        cout << zielfeld << " Turm hat hier keinen legitimen zug" << endl;
+      } else {
+        cout << moeglicheZuege.size() << " legitime Züge für den Turm " << zielfeld << endl;
+      }
       
       angegriffeneFelderFigur = angegriffeneFelderRook(ausgangsfeldKoord, brettState, weißAmZug);
       
@@ -376,6 +392,13 @@ void zugMachen(string zugNotation)
       cout << "Bishop wurde bewegt!" << endl;
       moeglicheZuege = moeglicheZuegeBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
+      
+      if (moeglicheZuege.size() == 0) {
+        cout << zielfeld << " Läufer hat hier keinen legitimen zug" << endl;
+      } else {
+        cout << moeglicheZuege.size() << " legitime Züge für den Läufer " << zielfeld << endl;
+      }
+      
       angegriffeneFelderFigur = angegriffeneFelderBishop(ausgangsfeldKoord, brettState, weißAmZug);
       
       //moeglicheZuegeAusgeben(moeglicheZuege, "Läufer");
@@ -386,6 +409,12 @@ void zugMachen(string zugNotation)
     case 'Q':
     case 'q':
       moeglicheZuege = moeglicheZuegeQueen(ausgangsfeldKoord, brettState, weißAmZug);
+      
+      if (moeglicheZuege.size() == 0) {
+        cout << zielfeld << " Queen hat hier keinen legitimen zug" << endl;
+      } else {
+        cout << moeglicheZuege.size() << " legitime Züge für die Queen " << zielfeld << endl;
+      }
       
       angegriffeneFelderFigur = angegriffeneFelderQueen(ausgangsfeldKoord, brettState, weißAmZug);
       
@@ -430,6 +459,7 @@ void zugMachen(string zugNotation)
   moeglicheAngriffeZuruecksetzen();
   
   // schlägt vermutlich fehlt
+  
   angriffeType moeglicheAngegriffeneFelder = angriffeFinden(testBrettState, weißAmZug);
   
  
@@ -589,33 +619,16 @@ int main(int argc, const char * argv[]) {
   
   srand(time(0));
   
-  
-  
-  /*
-  zugMachen("e2-e4");
-  zugMachen("e7-e5");
-  zugMachen("g1-f3");
-  zugMachen("b8-c6");
-  zugMachen("f1-c4");
- 
 
-  // matt:
-  //zugMachen("f5-f3");
+  // versuch einen anderen zug zu machen:
+  zugMachen("d6-e6");
+  zugMachen("e3-d5");
+  
+  // nofalls, falls performance schlecht ist: Erkennen, durch welchen angriff der könig im schach steht
+  // -> zug finden, der die diagonale blockt
   
   
-  brettAusgeben();
-  
-  cout << spielZuege << endl;
-  
-  angriffeZuruecksetzen();
-   */
-  
-  
-  for (int i = 0; i < 15; i++) {
-    positionGenerieren();
-  }
-  
-  
+  brettAusgeben(); 
 
 
   return 0;

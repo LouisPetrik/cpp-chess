@@ -10,6 +10,7 @@
 #include <vector>
 #include <array>
 #include "Linie.h"
+#include "check.h"
 
 
 const char schwarzeFiguren[6] = {'p', 'r', 'q', 'b', 'n', 'k'};
@@ -85,7 +86,23 @@ vector<array<int, 2>> moeglicheZuegeRook(int ausgangsfeldKoord[2], char brettSta
   }
   
   
-  return zuege;
+  // hier alle züge auch schachlich korrekt überprüfen:
+  // dieser teil muss quasi genauso für alle anderen figuren übernommen werden.
+  vector<array<int, 2>> legitimeZuege;
+  
+  char figurZeichen = weißAmZug ? 'R' : 'r';
+  
+  for (auto zug : zuege) {
+    if (zugSchachlichLegitim(zug, ausgangsfeldKoord, brettState, figurZeichen, weißAmZug)) {
+      
+      legitimeZuege.push_back({{ zug[0], zug[1] }});
+      
+    } else {
+      cout << "Der Zug: " << zug[0] << ", " << zug[1] << " ist nicht legitim!" << endl;
+    }
+  }
+  
+  return legitimeZuege;
 }
 
 

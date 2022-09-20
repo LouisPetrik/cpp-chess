@@ -4,6 +4,7 @@
 #include <array>
 #include <iostream>
 #include <algorithm>
+#include "check.h"
 
 using namespace std;
 
@@ -164,7 +165,23 @@ vector<array<int, 2>> moeglicheZuegeKnight(int ausgangsfeldKoord[2], char brettS
     zuege.push_back({{i + 2, j + 1}});
   }
   
-  return zuege;
+  // hier alle züge auch schachlich korrekt überprüfen:
+   // dieser teil muss quasi genauso für alle anderen figuren übernommen werden.
+  vector<array<int, 2>> legitimeZuege;
+  
+  char figurZeichen = weißAmZug ? 'N' : 'n';
+  
+  for (auto zug : zuege) {
+    if (zugSchachlichLegitim(zug, ausgangsfeldKoord, brettState, figurZeichen, weißAmZug)) {
+      
+      legitimeZuege.push_back({{ zug[0], zug[1] }});
+      
+    } else {
+      cout << "Der Zug: " << zug[0] << ", " << zug[1] << " ist nicht legitim!" << endl;
+    }
+  }
+  
+  return legitimeZuege;
 }
 
 

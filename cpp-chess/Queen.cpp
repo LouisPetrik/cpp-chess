@@ -11,6 +11,7 @@
 #include <vector>
 #include <array>
 #include <iostream>
+#include "check.h"
 
 using namespace std;
 
@@ -101,8 +102,21 @@ vector<array<int, 2>> moeglicheZuegeQueen(int ausgangsfeldKoord[2], char brettSt
     zuege.push_back({{ feld[0], feld[1] }});
   }
   
+  // hier alle züge auch schachlich korrekt überprüfen:
+   // dieser teil muss quasi genauso für alle anderen figuren übernommen werden.
+  vector<array<int, 2>> legitimeZuege;
   
+  char figurZeichen = weißAmZug ? 'Q' : 'q';
   
+  for (auto zug : zuege) {
+    if (zugSchachlichLegitim(zug, ausgangsfeldKoord, brettState, figurZeichen, weißAmZug)) {
+      
+      legitimeZuege.push_back({{ zug[0], zug[1] }});
+      
+    } else {
+      cout << "Der Zug: " << zug[0] << ", " << zug[1] << " ist nicht legitim!" << endl;
+    }
+  }
   
-  return zuege;
+  return legitimeZuege;
 }

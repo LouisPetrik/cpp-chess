@@ -6,6 +6,7 @@
 //
 
 #include "diagonale.h"
+#include "check.h"
 #include <stdio.h>
 #include <vector>
 #include <array>
@@ -55,5 +56,22 @@ vector<array<int, 2>> moeglicheZuegeBishop(int ausgangsfeldKoord[2], char brettS
     zuege.push_back({{ feld[0], feld[1] }});
   }
   
-  return zuege;
+  // hier alle züge auch schachlich korrekt überprüfen:
+   // dieser teil muss quasi genauso für alle anderen figuren übernommen werden.
+  vector<array<int, 2>> legitimeZuege;
+  
+  char figurZeichen = weißAmZug ? 'B' : 'b';
+  
+  for (auto zug : zuege) {
+    if (zugSchachlichLegitim(zug, ausgangsfeldKoord, brettState, figurZeichen, weißAmZug)) {
+      
+      legitimeZuege.push_back({{ zug[0], zug[1] }});
+      
+    } else {
+      cout << "Der Zug: " << zug[0] << ", " << zug[1] << " ist nicht legitim!" << endl;
+    }
+  }
+  
+  return legitimeZuege;
+  
 }

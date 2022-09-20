@@ -97,8 +97,7 @@ vector<array<int, 2>> linieFelder(char brettState[8][8], int ausgangsfeldKoord[2
         // auf eigene figur gestoßen, feld wird nicht aufgenommen und loop abgebrochen
         if (weißAmZug && istWeißeFigur(brettState[iTemp][jTemp]))
         {
-          cout << "es wurde auf eine eigene, weiße figur gestoßen bei " << iTemp << ", " << jTemp << endl;
-          cout << "Die figur: " << brettState[iTemp][jTemp] << endl;
+     
           geblockt = true;
           break;
         }
