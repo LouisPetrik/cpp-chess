@@ -28,6 +28,8 @@ bool istWeißeFigur(char brettChar);
 bool istSchwarzeFigur(char brettChar);
 
 
+string generiereFEN(char brettState[8][8]); 
+
 angriffeType angriffeFinden(char brettState[8][8], bool weißAmZug);
 
 int *feldbezeichnungZuKoord(string feld); 

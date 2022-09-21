@@ -40,6 +40,67 @@ using namespace std;
 
 
 
+string generiereFEN(char brettState[8][8]) {
+  string FEN;
+  
+  for (int i = 0; i < 8; i++) {
+    
+    // checken, ob die gesamte zeile leer ist:
+    bool zeileLeer = true;
+    for (int j = 0; j < 8; j++) {
+      if (brettState[i][j] != '.') {
+        zeileLeer = false;
+      }
+    }
+    
+    if (zeileLeer) {
+      // wenn die erste zeile leer ist, folgt davor natürlich kein /
+      FEN.append("8");
+      
+    } else {
+      // über die einzelnen figuren in der jeder zeile gehen:
+      int leereFelder = 0;
+      for (int j = 0; j < 8; j++) {
+        
+        // wenn das feld leer ist, wird leereFelder inkrementiert
+        if (brettState[i][j] == '.') {
+          leereFelder++;
+        }
+        
+        // wenn einfach nur eine Figur gefunden wird
+        if (brettState[i][j] != '.' && leereFelder == 0) {
+          char figur = brettState[i][j];
+          FEN.append(string(1, figur));
+  
+          leereFelder = 0;
+        }
+        
+        
+        // wenn nach den leeren feldern eine figur gefunden wird:
+        if (brettState[i][j] != '.' && leereFelder > 0) {
+          char figur = brettState[i][j];
+          FEN.append(to_string(leereFelder) + figur);
+          leereFelder = 0;
+        }
+        
+        // wenn ansonsten noch leere Felder da waren und wir mit dem iterieren am
+        // ende der zeile angekommen sind
+        if (leereFelder > 0 && j == 7) {
+          FEN.append(to_string(leereFelder));
+        }
+      }
+    }
+    
+    // wenn nicht die letzte Zeile ist, wird
+    if (i < 7) {
+      FEN.append("/");
+    }
+    
+  }
+
+  return FEN;
+}
+
 bool istWeißeFigur(char brettChar) {
   char figuren[6] = {'P', 'R', 'Q', 'B', 'N', 'K'};
   char* end = figuren + sizeof(figuren) / sizeof(figuren[0]);

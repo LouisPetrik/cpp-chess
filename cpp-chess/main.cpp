@@ -11,6 +11,8 @@
 #include <cstring>
 #include <vector>
 #include <string>
+#include <array>
+#include <unordered_map>
 
 #include "Util.h"
 #include "Pawn.h"
@@ -67,14 +69,14 @@ string spielZuege = "";
 
 
 char brettState[8][8] = {
-      {'K', '.', '.', '.', '.', '.', '.', '.'},
+      {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+      {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', 'R', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', '.', 'n', '.', '.', '.'},
       {'.', '.', '.', '.', '.', '.', '.', '.'},
-      {'.', '.', '.', '.', 'k', '.', '.', '.'},
+      {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+      {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'},
 };
 
 char angriffeWeiß[8][8] = {
@@ -299,6 +301,9 @@ void zugMachen(string zugNotation)
       } else {
         cout << moeglicheZuege.size() << " legitime Züge für den Bauern " << zielfeld << endl;
       }
+      
+      
+      moeglicheZuegeAusgeben(moeglicheZuege, "bauer");
     
       
       // hier testen, ob der bauern-zug zufällig ein nehmen via. en-passant war:
@@ -619,10 +624,16 @@ int main(int argc, const char * argv[]) {
   
   srand(time(0));
   
+  
+
 
   // versuch einen anderen zug zu machen:
-  zugMachen("d6-e6");
-  zugMachen("e3-d5");
+  /*
+  zugMachen("e2-e4");
+  zugMachen("e7-e5");*/ 
+  
+  
+  cout << generiereFEN(brettState) << endl;
   
   // nofalls, falls performance schlecht ist: Erkennen, durch welchen angriff der könig im schach steht
   // -> zug finden, der die diagonale blockt
