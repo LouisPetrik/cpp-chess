@@ -624,8 +624,13 @@ int main(int argc, const char * argv[]) {
   
   srand(time(0));
   
+  int jLinkerTurm;
+  int jRechterTurm;
+  // testen des fischer bettstates und finden der position der türme:
+  
   
 
+  positionGenerieren(); 
 
   // versuch einen anderen zug zu machen:
   /*

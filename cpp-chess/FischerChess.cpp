@@ -12,7 +12,9 @@
 
 using namespace std;
 
-void positionGenerieren() {
+typedef array<array<char, 8>, 8> brett;
+
+brett positionGenerieren() {
   
   
     
@@ -96,6 +98,56 @@ void positionGenerieren() {
   }
   cout << endl;
   cout << "----------------------" << endl;
+
   
+
+  
+  fischerBrett[0][0] = 'H';
+  
+  cout << fischerBrett[0][0] << endl;
+  
+  for (int i = 0; i < 8; i++) {
+    
+    if (i == 1) {
+      fischerBrett[i].fill('p');
+    }
+    
+    if (i == 6) {
+      fischerBrett[i].fill('P');
+    }
+    
+    // einfach füllen mit "."
+    if (i > 2 && i < 5) {
+      fischerBrett[i].fill('.');
+    }
+    
+    // die schwarzen figuren einfügen:
+    if (i == 0) {
+      for (int j = 0; j < 8; j++) {
+        fischerBrett[i][j] = figuren[j];
+      }
+    }
+    
+    // die weißen figuren einfügen:
+    if (i == 7) {
+      for (int j = 0; j < 8; j++) {
+        fischerBrett[i][j] = figuren[j];
+      }
+    }
+
+  }
+  
+  cout << "------" << endl;
+  // testeweise das brett ausgeben:
+  for (int i = 0; i < 7; i++) {
+    for (int j = 0; j < 7; j++) {
+      cout << fischerBrett[i][j];
+    }
+    cout << endl;
+  }
+  
+  cout << "------" << endl;
+  
+  return fischerBrett;
   
 }
